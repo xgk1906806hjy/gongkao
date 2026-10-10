@@ -2,12 +2,18 @@
   <view class="muted">{{index+1}} / {{total}}</view>
   <view class="card stem">{{q.stem}}</view>
   <view
-    class="card opt {{answers[q.id]===item.key?'on':''}}"
+    class="card opt {{answers[q.id]===item.key?'on':''}} {{reveals[q.id] && reveals[q.id].answer_key===item.key?'correct':''}} {{reveals[q.id] && answers[q.id]===item.key && !reveals[q.id].is_correct?'wrong':''}}"
     wx:for="{{q.options}}"
     wx:key="key"
     data-key="{{item.key}}"
     bindtap="choose"
   >{{item.key}}. {{item.content}}</view>
+  <view class="card analysis" wx:if="{{reveals[q.id]}}">
+    <view class="{{reveals[q.id].is_correct?'ok':'bad'}}">
+      {{reveals[q.id].is_correct?'回答正确':'回答错误'}} · 正确答案 {{reveals[q.id].answer_key}}
+    </view>
+    <view class="muted" wx:if="{{reveals[q.id].analysis}}">解析：{{reveals[q.id].analysis}}</view>
+  </view>
   <view class="nav">
     <button size="mini" disabled="{{index===0}}" bindtap="prev">上一题</button>
     <button size="mini" wx:if="{{index<total-1}}" bindtap="next">下一题</button>

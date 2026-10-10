@@ -1,4 +1,7 @@
 <view class="container">
+  <view class="toolbar" wx:if="{{list.length}}">
+    <button size="mini" class="btn-primary" bindtap="rePractice">错题再练</button>
+  </view>
   <view class="card" wx:for="{{list}}" wx:key="id">
     <view class="stem">{{item.question.stem}}</view>
     <view class="muted">答错 {{item.wrong_count}} 次</view>

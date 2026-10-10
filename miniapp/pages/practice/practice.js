@@ -16,7 +16,9 @@ Page({
     const categoryId = Number(e.currentTarget.dataset.id)
     const mode = e.currentTarget.dataset.mode
     auth.ensureLogin().then(() => {
-      return api.post('/practice/sessions', { category_id: categoryId, mode, count: 10 })
+      return api.post('/practice/sessions', {
+        category_id: categoryId, mode, count: 10, show_analysis: true
+      })
     }).then((data) => {
       wx.setStorageSync('practice_session', data)
       wx.navigateTo({ url: '/pages/practice/quiz/quiz' })

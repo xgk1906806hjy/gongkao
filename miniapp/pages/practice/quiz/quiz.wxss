@@ -1,3 +1,7 @@
 .stem { font-size: 30rpx; font-weight: 600; }
 .opt.on { border: 2rpx solid #1a4f7a; background: #e8f1f8; }
+.opt.correct { border: 2rpx solid #2f6b3a; background: #eef8f0; }
+.opt.wrong { border: 2rpx solid #b91c1c; background: #fef2f2; }
+.analysis .ok { color: #2f6b3a; font-weight: 600; margin-bottom: 8rpx; }
+.analysis .bad { color: #b91c1c; font-weight: 600; margin-bottom: 8rpx; }
 .nav { display: flex; justify-content: space-between; margin-top: 24rpx; gap: 16rpx; }

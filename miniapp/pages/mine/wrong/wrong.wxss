@@ -1,1 +1,2 @@
+.toolbar { margin-bottom: 16rpx; }
 .stem { font-weight: 600; margin-bottom: 8rpx; }

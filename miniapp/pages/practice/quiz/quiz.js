@@ -7,7 +7,10 @@ Page({
     index: 0,
     total: 0,
     q: null,
-    answers: {}
+    answers: {},
+    reveals: {},
+    showAnalysis: true,
+    locked: false
   },
   onLoad() {
     const sess = wx.getStorageSync('practice_session') || {}
@@ -18,14 +21,37 @@ Page({
       total: questions.length,
       q: questions[0] || null,
       index: 0,
-      answers: {}
+      answers: {},
+      reveals: {},
+      showAnalysis: sess.show_analysis !== false,
+      locked: false
     })
   },
   choose(e) {
+    if (this.data.locked) return
     const key = e.currentTarget.dataset.key
     const qid = this.data.q.id
     const answers = { ...this.data.answers, [qid]: key }
     this.setData({ answers })
+    if (!this.data.showAnalysis || this.data.reveals[qid]) return
+    this.setData({ locked: true })
+    api.post('/practice/check', {
+      session_id: this.data.sessionId,
+      question_id: qid,
+      user_key: key
+    }).then((res) => {
+      const reveals = {
+        ...this.data.reveals,
+        [qid]: {
+          is_correct: res.is_correct,
+          answer_key: res.answer_key,
+          analysis: res.analysis || ''
+        }
+      }
+      this.setData({ reveals, locked: false })
+    }).catch(() => {
+      this.setData({ locked: false })
+    })
   },
   prev() {
     const index = this.data.index - 1
