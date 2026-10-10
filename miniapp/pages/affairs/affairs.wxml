@@ -3,6 +3,15 @@
     <input placeholder="搜索时政" value="{{keyword}}" bindinput="onKeyword" bindconfirm="load" />
     <button size="mini" class="btn-primary" bindtap="load">搜索</button>
   </view>
+  <scroll-view scroll-x class="tags">
+    <view
+      class="tag-item {{(tag==='' && item==='全部') || tag===item ? 'on' : ''}}"
+      wx:for="{{tags}}"
+      wx:key="*this"
+      data-tag="{{item}}"
+      bindtap="onTag"
+    >{{item}}</view>
+  </scroll-view>
   <view class="card" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" bindtap="goDetail">
     <view class="title">{{item.title}}</view>
     <view class="muted">{{item.source}} · {{item.published_at}}</view>
