@@ -14,6 +14,7 @@ func Register(r *gin.Engine, h *Handlers) {
 	{
 		v1.POST("/auth/wechat", h.WechatLogin)
 		v1.POST("/auth/refresh", h.Refresh)
+		v1.GET("/config/client", h.ClientConfig)
 
 		v1.GET("/announcements", h.ListAnnouncements)
 		v1.GET("/announcements/:id", h.GetAnnouncement)
@@ -27,6 +28,8 @@ func Register(r *gin.Engine, h *Handlers) {
 		{
 			me.GET("", h.Me)
 			me.PATCH("", h.UpdateMe)
+			me.GET("/subscribe-prefs", h.GetSubscribePrefs)
+			me.POST("/subscribe-prefs", h.UpsertSubscribePrefs)
 			me.GET("/exams", h.ListMyExams)
 			me.POST("/exams", h.JoinExam)
 			me.DELETE("/exams/:announcementId", h.LeaveExam)
@@ -43,6 +46,7 @@ func Register(r *gin.Engine, h *Handlers) {
 		prac := v1.Group("/practice", middleware.Auth(h.JWT, pkg.TokenAccess))
 		{
 			prac.POST("/sessions", h.StartPractice)
+			prac.POST("/check", h.CheckPracticeAnswer)
 			prac.POST("/submit", h.SubmitPractice)
 		}
 
@@ -54,7 +58,14 @@ func Register(r *gin.Engine, h *Handlers) {
 				authed.GET("/announcements", h.AdminListAnnouncements)
 				authed.POST("/announcements", h.AdminCreateAnnouncement)
 				authed.PATCH("/announcements/:id", h.AdminUpdateAnnouncement)
+				authed.GET("/categories", h.AdminListCategories)
+				authed.POST("/categories", h.AdminUpsertCategory)
+				authed.GET("/questions", h.AdminListQuestions)
+				authed.POST("/questions", h.AdminCreateQuestion)
+				authed.PATCH("/questions/:id", h.AdminUpdateQuestion)
+				authed.DELETE("/questions/:id", h.AdminDeleteQuestion)
 				authed.POST("/questions/import", h.AdminImportQuestions)
+				authed.GET("/affairs", h.AdminListAffairs)
 				authed.POST("/affairs", h.AdminCreateAffair)
 				authed.PATCH("/affairs/:id", h.AdminUpdateAffair)
 				authed.GET("/crawl-failures", h.AdminCrawlFailures)

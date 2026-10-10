@@ -41,8 +41,10 @@ func main() {
 	annSvc := service.NewAnnouncementService(db)
 	affSvc := service.NewAffairsService(db)
 	examSvc := service.NewExamTodoService(db, rdb)
-	remindSvc := service.NewReminderService(db, rdb, wxCli, cfg)
-	runner := crawler.NewRunner(db, annSvc, affSvc)
+	subSvc := service.NewSubscribeService(db)
+	remindSvc := service.NewReminderService(db, rdb, wxCli, cfg, subSvc)
+	affPushSvc := service.NewAffairsPushService(db, wxCli, cfg, subSvc)
+	runner := crawler.NewRunner(db, annSvc, affSvc, cfg)
 
 	ctx := context.Background()
 	_ = examSvc.EnqueuePendingReminders(ctx)
@@ -57,8 +59,13 @@ func main() {
 		})
 		runner.RunOnce(ctx)
 	}
+	if cfg.AffairsDailyPushEnabled {
+		_, _ = c.AddFunc("0 8 * * *", func() {
+			affPushSvc.PushDaily(context.Background())
+		})
+	}
 	c.Start()
-	slog.Info("worker started", "crawler", cfg.CrawlerEnabled, "wx_mock", cfg.WXMock)
+	slog.Info("worker started", "crawler", cfg.CrawlerEnabled, "wx_mock", cfg.WXMock, "affairs_push", cfg.AffairsDailyPushEnabled)
 
 	ch := make(chan os.Signal, 1)
 	signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM)

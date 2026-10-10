@@ -19,12 +19,14 @@ func NewAnnouncementService(db *gorm.DB) *AnnouncementService {
 }
 
 type AnnouncementQuery struct {
-	Type      string
-	Region    string
-	Keyword   string
-	Page      int
-	PageSize  int
-	AdminView bool
+	Type          string
+	Region        string
+	Keyword       string
+	PublishedFrom string // YYYY-MM-DD
+	PublishedTo   string // YYYY-MM-DD
+	Page          int
+	PageSize      int
+	AdminView     bool
 }
 
 func (s *AnnouncementService) List(q AnnouncementQuery) (*pkg.PageResult, error) {
@@ -36,11 +38,21 @@ func (s *AnnouncementService) List(q AnnouncementQuery) (*pkg.PageResult, error)
 		db = db.Where("type = ?", q.Type)
 	}
 	if q.Region != "" {
-		db = db.Where("region = ?", q.Region)
+		db = db.Where("region LIKE ?", "%"+strings.TrimSpace(q.Region)+"%")
 	}
 	if q.Keyword != "" {
 		kw := "%" + strings.TrimSpace(q.Keyword) + "%"
-		db = db.Where("title ILIKE ? OR summary ILIKE ?", kw, kw)
+		db = db.Where("title LIKE ? OR summary LIKE ?", kw, kw)
+	}
+	if q.PublishedFrom != "" {
+		if t, err := time.ParseInLocation("2006-01-02", q.PublishedFrom, time.Local); err == nil {
+			db = db.Where("published_at >= ?", t)
+		}
+	}
+	if q.PublishedTo != "" {
+		if t, err := time.ParseInLocation("2006-01-02", q.PublishedTo, time.Local); err == nil {
+			db = db.Where("published_at < ?", t.Add(24*time.Hour))
+		}
 	}
 	var total int64
 	if err := db.Count(&total).Error; err != nil {

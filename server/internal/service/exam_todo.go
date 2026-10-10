@@ -172,6 +172,24 @@ func (s *ExamTodoService) PatchTodo(ctx context.Context, userID, todoID uint64, 
 	return &todo, nil
 }
 
+// SyncTodosForAnnouncement refreshes pending todos for all users who joined this announcement.
+func (s *ExamTodoService) SyncTodosForAnnouncement(ctx context.Context, announcementID uint64) error {
+	var ann model.Announcement
+	if err := s.db.First(&ann, announcementID).Error; err != nil {
+		return err
+	}
+	var exams []model.UserExam
+	if err := s.db.Where("announcement_id = ?", announcementID).Find(&exams).Error; err != nil {
+		return err
+	}
+	for _, ue := range exams {
+		if err := s.generateTodos(ctx, ue.UserID, ue.ID, &ann); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 // EnqueuePendingReminders loads pending reminds into redis (startup compensation).
 func (s *ExamTodoService) EnqueuePendingReminders(ctx context.Context) error {
 	if s.rdb == nil {

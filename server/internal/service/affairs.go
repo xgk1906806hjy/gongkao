@@ -33,11 +33,11 @@ func (s *AffairsService) List(q AffairsQuery) (*pkg.PageResult, error) {
 		db = db.Where("status = ?", model.StatusPublished)
 	}
 	if q.Tag != "" {
-		db = db.Where("tags ILIKE ?", "%"+q.Tag+"%")
+		db = db.Where("tags LIKE ?", "%"+q.Tag+"%")
 	}
 	if q.Keyword != "" {
 		kw := "%" + strings.TrimSpace(q.Keyword) + "%"
-		db = db.Where("title ILIKE ? OR summary ILIKE ?", kw, kw)
+		db = db.Where("title LIKE ? OR summary LIKE ?", kw, kw)
 	}
 	var total int64
 	_ = db.Count(&total).Error

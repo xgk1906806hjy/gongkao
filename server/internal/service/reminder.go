@@ -20,10 +20,11 @@ type ReminderService struct {
 	rdb *redis.Client
 	wx  *wx.Client
 	cfg *config.Config
+	sub *SubscribeService
 }
 
-func NewReminderService(db *gorm.DB, rdb *redis.Client, wxCli *wx.Client, cfg *config.Config) *ReminderService {
-	return &ReminderService{db: db, rdb: rdb, wx: wxCli, cfg: cfg}
+func NewReminderService(db *gorm.DB, rdb *redis.Client, wxCli *wx.Client, cfg *config.Config, sub *SubscribeService) *ReminderService {
+	return &ReminderService{db: db, rdb: rdb, wx: wxCli, cfg: cfg, sub: sub}
 }
 
 func (s *ReminderService) ProcessDue(ctx context.Context) {
@@ -71,6 +72,14 @@ func (s *ReminderService) sendOne(ctx context.Context, todoID uint64) {
 	if err := s.db.First(&user, todo.UserID).Error; err != nil {
 		return
 	}
+	if s.sub != nil && !s.sub.HasAccept(todo.UserID, model.SubscribeKindTodo) {
+		_ = s.db.Model(&todo).Updates(map[string]interface{}{
+			"remind_status":     model.RemindSkipped,
+			"last_remind_error": "subscribe not authorized",
+		}).Error
+		slog.Info("remind skipped: no subscribe auth", "todo", todo.ID, "user", user.ID)
+		return
+	}
 	title := todo.Title
 	annTitle := ""
 	if todo.Announcement != nil {
@@ -81,7 +90,16 @@ func (s *ReminderService) sendOne(ctx context.Context, todoID uint64) {
 	}
 	tpl := s.cfg.WXSubscribeTemplateTodo
 	if tpl == "" {
-		tpl = "TODO_TEMPLATE"
+		if s.cfg.WXMock {
+			tpl = "MOCK_TODO_TEMPLATE"
+		} else {
+			_ = s.db.Model(&todo).Updates(map[string]interface{}{
+				"remind_status":     model.RemindSkipped,
+				"last_remind_error": "template id not configured",
+			}).Error
+			slog.Warn("remind skipped: empty template", "todo", todo.ID)
+			return
+		}
 	}
 	err := s.wx.SendSubscribe(ctx, wx.SubscribeReq{
 		ToUser:     user.OpenID,

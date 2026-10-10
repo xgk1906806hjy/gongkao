@@ -206,12 +206,29 @@ type CrawlFailure struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
+const (
+	SubscribeAccept = "accept"
+	SubscribeReject = "reject"
+	SubscribeKindTodo     = "todo"
+	SubscribeKindAffairs  = "affairs"
+)
+
+// UserSubscribePref tracks WeChat subscribe-message authorization per template kind.
+type UserSubscribePref struct {
+	ID        uint64    `gorm:"primaryKey" json:"id"`
+	UserID    uint64    `gorm:"uniqueIndex:idx_user_sub_kind;not null" json:"user_id"`
+	Kind      string    `gorm:"size:32;uniqueIndex:idx_user_sub_kind;not null" json:"kind"`
+	Status    string    `gorm:"size:16;not null" json:"status"` // accept | reject
+	UpdatedAt time.Time `json:"updated_at"`
+	CreatedAt time.Time `json:"created_at"`
+}
+
 func AllModels() []interface{} {
 	return []interface{}{
 		&User{}, &AdminUser{}, &Announcement{}, &UserExam{}, &Todo{},
 		&QuestionCategory{}, &Question{}, &QuestionOption{},
 		&PracticeSession{}, &UserAnswer{}, &WrongQuestion{},
 		&AffairsArticle{}, &AffairsFavorite{}, &AffairsRead{},
-		&CrawlFailure{},
+		&CrawlFailure{}, &UserSubscribePref{},
 	}
 }

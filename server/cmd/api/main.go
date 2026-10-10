@@ -42,6 +42,7 @@ func main() {
 	examSvc := service.NewExamTodoService(db, rdb)
 	pracSvc := service.NewPracticeService(db)
 	affSvc := service.NewAffairsService(db)
+	subSvc := service.NewSubscribeService(db)
 
 	if err := authSvc.EnsureAdmin(); err != nil {
 		log.Fatalf("admin bootstrap: %v", err)
@@ -50,10 +51,26 @@ func main() {
 	_ = affSvc.SeedIfEmpty()
 
 	// seed announcements once via crawler
-	crawler.NewRunner(db, annSvc, affSvc).RunOnce(nil)
+	crawler.NewRunner(db, annSvc, affSvc, cfg).RunOnce(nil)
 
 	h := &handler.Handlers{
-		Auth: authSvc, Ann: annSvc, Exam: examSvc, Prac: pracSvc, Aff: affSvc, JWT: jwtm, DB: db,
+		Auth: authSvc, Ann: annSvc, Exam: examSvc, Prac: pracSvc, Aff: affSvc, Sub: subSvc,
+		JWT: jwtm, DB: db,
+		ClientCfg: func() gin.H {
+			todoTpl := cfg.WXSubscribeTemplateTodo
+			affTpl := cfg.WXSubscribeTemplateAff
+			if todoTpl == "" && cfg.WXMock {
+				todoTpl = "MOCK_TODO_TEMPLATE"
+			}
+			if affTpl == "" && cfg.WXMock {
+				affTpl = "MOCK_AFFAIRS_TEMPLATE"
+			}
+			return gin.H{
+				"todo_template_id":     todoTpl,
+				"affairs_template_id":  affTpl,
+				"wx_mock":              cfg.WXMock,
+			}
+		},
 	}
 
 	if cfg.AppEnv == "prod" {

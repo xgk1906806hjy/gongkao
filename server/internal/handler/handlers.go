@@ -1,8 +1,10 @@
 package handler
 
 import (
+	"encoding/csv"
 	"errors"
 	"strconv"
+	"strings"
 
 	"gongkao/internal/middleware"
 	"gongkao/internal/model"
@@ -14,13 +16,25 @@ import (
 )
 
 type Handlers struct {
-	Auth *service.AuthService
-	Ann  *service.AnnouncementService
-	Exam *service.ExamTodoService
-	Prac *service.PracticeService
-	Aff  *service.AffairsService
-	JWT  *pkg.JWTManager
-	DB   *gorm.DB
+	Auth      *service.AuthService
+	Ann       *service.AnnouncementService
+	Exam      *service.ExamTodoService
+	Prac      *service.PracticeService
+	Aff       *service.AffairsService
+	Sub       *service.SubscribeService
+	ClientCfg func() gin.H
+	JWT       *pkg.JWTManager
+	DB        *gorm.DB
+}
+
+func parseCSV(body string) ([][]string, error) {
+	r := csv.NewReader(strings.NewReader(body))
+	r.TrimLeadingSpace = true
+	rows, err := r.ReadAll()
+	if err != nil {
+		return nil, err
+	}
+	return rows, nil
 }
 
 func (h *Handlers) Health(c *gin.Context) {
@@ -87,10 +101,42 @@ func (h *Handlers) UpdateMe(c *gin.Context) {
 	pkg.OK(c, u)
 }
 
+func (h *Handlers) ClientConfig(c *gin.Context) {
+	if h.ClientCfg != nil {
+		pkg.OK(c, h.ClientCfg())
+		return
+	}
+	pkg.OK(c, gin.H{})
+}
+
+func (h *Handlers) GetSubscribePrefs(c *gin.Context) {
+	prefs, err := h.Sub.GetPrefs(middleware.UserID(c))
+	if err != nil {
+		pkg.Internal(c, err.Error())
+		return
+	}
+	pkg.OK(c, prefs)
+}
+
+func (h *Handlers) UpsertSubscribePrefs(c *gin.Context) {
+	var req service.SubscribePrefs
+	if err := c.ShouldBindJSON(&req); err != nil {
+		pkg.BadRequest(c, "invalid body")
+		return
+	}
+	prefs, err := h.Sub.UpsertPrefs(middleware.UserID(c), req)
+	if err != nil {
+		pkg.BadRequest(c, err.Error())
+		return
+	}
+	pkg.OK(c, prefs)
+}
+
 func (h *Handlers) ListAnnouncements(c *gin.Context) {
 	page, size := pkg.PageParams(c)
 	res, err := h.Ann.List(service.AnnouncementQuery{
 		Type: c.Query("type"), Region: c.Query("region"), Keyword: c.Query("keyword"),
+		PublishedFrom: c.Query("published_from"), PublishedTo: c.Query("published_to"),
 		Page: page, PageSize: size,
 	})
 	if err != nil {
@@ -210,6 +256,20 @@ func (h *Handlers) StartPractice(c *gin.Context) {
 	var req service.StartSessionReq
 	_ = c.ShouldBindJSON(&req)
 	res, err := h.Prac.StartSession(middleware.UserID(c), req)
+	if err != nil {
+		pkg.BadRequest(c, err.Error())
+		return
+	}
+	pkg.OK(c, res)
+}
+
+func (h *Handlers) CheckPracticeAnswer(c *gin.Context) {
+	var req service.CheckAnswerReq
+	if err := c.ShouldBindJSON(&req); err != nil || req.SessionID == 0 || req.QuestionID == 0 {
+		pkg.BadRequest(c, "session_id, question_id, user_key required")
+		return
+	}
+	res, err := h.Prac.CheckAnswer(middleware.UserID(c), req)
 	if err != nil {
 		pkg.BadRequest(c, err.Error())
 		return
@@ -353,6 +413,8 @@ func (h *Handlers) AdminUpdateAnnouncement(c *gin.Context) {
 		pkg.Internal(c, err.Error())
 		return
 	}
+	// sync pending todos when timeline fields may have changed
+	_ = h.Exam.SyncTodosForAnnouncement(c.Request.Context(), id)
 	pkg.OK(c, a)
 }
 
@@ -370,6 +432,26 @@ func (h *Handlers) AdminListAnnouncements(c *gin.Context) {
 }
 
 func (h *Handlers) AdminImportQuestions(c *gin.Context) {
+	ct := c.ContentType()
+	if ct == "text/csv" || ct == "application/csv" || c.Query("format") == "csv" {
+		body, err := c.GetRawData()
+		if err != nil {
+			pkg.BadRequest(c, "read body failed")
+			return
+		}
+		rows, err := parseCSV(string(body))
+		if err != nil {
+			pkg.BadRequest(c, err.Error())
+			return
+		}
+		n, err := h.Prac.ImportCSV(rows)
+		if err != nil {
+			pkg.Internal(c, err.Error())
+			return
+		}
+		pkg.OK(c, gin.H{"imported": n})
+		return
+	}
 	var req struct {
 		Items []service.ImportQuestion `json:"items"`
 	}
@@ -383,6 +465,95 @@ func (h *Handlers) AdminImportQuestions(c *gin.Context) {
 		return
 	}
 	pkg.OK(c, gin.H{"imported": n})
+}
+
+func (h *Handlers) AdminListCategories(c *gin.Context) {
+	list, err := h.Prac.AdminListCategories()
+	if err != nil {
+		pkg.Internal(c, err.Error())
+		return
+	}
+	pkg.OK(c, gin.H{"list": list})
+}
+
+func (h *Handlers) AdminUpsertCategory(c *gin.Context) {
+	var cat model.QuestionCategory
+	if err := c.ShouldBindJSON(&cat); err != nil || cat.Name == "" {
+		pkg.BadRequest(c, "name required")
+		return
+	}
+	if err := h.Prac.UpsertCategory(&cat); err != nil {
+		pkg.Internal(c, err.Error())
+		return
+	}
+	pkg.OK(c, cat)
+}
+
+func (h *Handlers) AdminListQuestions(c *gin.Context) {
+	page, size := pkg.PageParams(c)
+	cid, _ := strconv.ParseUint(c.Query("category_id"), 10, 64)
+	res, err := h.Prac.AdminListQuestions(cid, page, size)
+	if err != nil {
+		pkg.Internal(c, err.Error())
+		return
+	}
+	pkg.OK(c, res)
+}
+
+func (h *Handlers) AdminCreateQuestion(c *gin.Context) {
+	var req struct {
+		model.Question
+		Options []model.QuestionOption `json:"options"`
+	}
+	if err := c.ShouldBindJSON(&req); err != nil || req.Stem == "" || req.AnswerKey == "" || req.CategoryID == 0 {
+		pkg.BadRequest(c, "category_id, stem, answer_key required")
+		return
+	}
+	q := req.Question
+	if err := h.Prac.AdminCreateQuestion(&q, req.Options); err != nil {
+		pkg.Internal(c, err.Error())
+		return
+	}
+	pkg.OK(c, q)
+}
+
+func (h *Handlers) AdminUpdateQuestion(c *gin.Context) {
+	id, _ := strconv.ParseUint(c.Param("id"), 10, 64)
+	var req struct {
+		Updates map[string]interface{}  `json:"updates"`
+		Options []model.QuestionOption  `json:"options"`
+	}
+	if err := c.ShouldBindJSON(&req); err != nil {
+		pkg.BadRequest(c, "invalid body")
+		return
+	}
+	q, err := h.Prac.AdminUpdateQuestion(id, req.Updates, req.Options)
+	if err != nil {
+		pkg.Internal(c, err.Error())
+		return
+	}
+	pkg.OK(c, q)
+}
+
+func (h *Handlers) AdminDeleteQuestion(c *gin.Context) {
+	id, _ := strconv.ParseUint(c.Param("id"), 10, 64)
+	if err := h.Prac.AdminDeleteQuestion(id); err != nil {
+		pkg.Internal(c, err.Error())
+		return
+	}
+	pkg.OK(c, gin.H{"ok": true})
+}
+
+func (h *Handlers) AdminListAffairs(c *gin.Context) {
+	page, size := pkg.PageParams(c)
+	res, err := h.Aff.List(service.AffairsQuery{
+		Tag: c.Query("tag"), Keyword: c.Query("keyword"), Page: page, PageSize: size, AdminView: true,
+	})
+	if err != nil {
+		pkg.Internal(c, err.Error())
+		return
+	}
+	pkg.OK(c, res)
 }
 
 func (h *Handlers) AdminCreateAffair(c *gin.Context) {
