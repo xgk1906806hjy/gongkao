@@ -1,3 +1,30 @@
 .title { font-weight: 700; margin-bottom: 12rpx; }
-.todo { display: flex; justify-content: space-between; align-items: center; padding: 16rpx 0; border-top: 1px solid #f0f2f5; }
+.todo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16rpx;
+  padding: 16rpx 0;
+  border-top: 1px solid #f0f2f5;
+}
 .todo.done { opacity: 0.5; }
+.todo.soon {
+  background: #fff7ed;
+  margin: 0 -16rpx;
+  padding: 16rpx;
+  border-radius: 12rpx;
+  border-top: none;
+}
+.todo-main { flex: 1; }
+.todo-title { font-weight: 600; margin-bottom: 6rpx; }
+.badge {
+  margin-left: 12rpx;
+  font-size: 20rpx;
+  color: #c2410c;
+  background: #ffedd5;
+  padding: 2rpx 10rpx;
+  border-radius: 8rpx;
+  font-weight: 500;
+}
+.countdown { color: #c2410c; font-size: 24rpx; margin-top: 6rpx; }
+.actions { display: flex; flex-direction: column; gap: 8rpx; }

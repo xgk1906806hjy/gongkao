@@ -1,12 +1,19 @@
 <view class="container">
   <view class="card" wx:for="{{groups}}" wx:key="announcement_id">
     <view class="title">{{item.ann_title}}</view>
-    <view class="todo {{t.status}}" wx:for="{{item.todos}}" wx:for-item="t" wx:key="id">
-      <view>
-        <view>{{t.title}}</view>
+    <view class="todo {{t.status}} {{t.soon?'soon':''}}" wx:for="{{item.todos}}" wx:for-item="t" wx:key="id">
+      <view class="todo-main">
+        <view class="todo-title">
+          {{t.title}}
+          <text class="badge" wx:if="{{t.soon}}">即将到期</text>
+        </view>
         <view class="muted">截止 {{t.due_at}} · 提醒 {{t.remind_at}}</view>
+        <view class="countdown" wx:if="{{t.status==='pending'}}">倒计时 {{t.countdown}}</view>
       </view>
-      <button size="mini" wx:if="{{t.status==='pending'}}" data-id="{{t.id}}" bindtap="done">完成</button>
+      <view class="actions" wx:if="{{t.status==='pending'}}">
+        <button size="mini" class="btn-primary" data-id="{{t.id}}" bindtap="done">完成</button>
+        <button size="mini" class="btn-ghost" data-id="{{t.id}}" bindtap="cancel">关闭</button>
+      </view>
     </view>
   </view>
   <view wx:if="{{groups.length===0}}" class="empty">暂无代办</view>
