@@ -22,10 +22,18 @@ Write-Host "5) todos"
 $todos = Invoke-RestMethod -Uri "$base/me/todos" -Headers $headers
 Write-Host "todo_groups=$($todos.data.list.Count)"
 
+Write-Host "5b) subscribe prefs + client config"
+$cfg = Invoke-RestMethod -Uri "$base/config/client"
+Invoke-RestMethod -Method Post -Uri "$base/me/subscribe-prefs" -Headers $headers -ContentType "application/json" -Body '{"todo":"accept","affairs":"reject"}' | Out-Null
+Write-Host "todo_template=$($cfg.data.todo_template_id)"
+
 Write-Host "6) practice"
 $cats = Invoke-RestMethod -Uri "$base/questions/categories"
 $cid = $cats.data.list[0].id
-$sess = Invoke-RestMethod -Method Post -Uri "$base/practice/sessions" -Headers $headers -ContentType "application/json" -Body (@{ category_id = $cid; mode = "sequential"; count = 2 } | ConvertTo-Json)
+$sess = Invoke-RestMethod -Method Post -Uri "$base/practice/sessions" -Headers $headers -ContentType "application/json" -Body (@{ category_id = $cid; mode = "sequential"; count = 2; show_analysis = $true } | ConvertTo-Json)
+$q0 = $sess.data.questions[0]
+$chk = Invoke-RestMethod -Method Post -Uri "$base/practice/check" -Headers $headers -ContentType "application/json" -Body (@{ session_id = $sess.data.session_id; question_id = $q0.id; user_key = "A" } | ConvertTo-Json)
+Write-Host "check answer_key=$($chk.data.answer_key)"
 $answers = @()
 foreach ($q in $sess.data.questions) {
   $answers += @{ question_id = $q.id; user_key = "A" }
@@ -34,7 +42,7 @@ $sub = Invoke-RestMethod -Method Post -Uri "$base/practice/submit" -Headers $hea
 Write-Host "practice correct=$($sub.data.correct)/$($sub.data.total)"
 
 Write-Host "7) affairs"
-$aff = Invoke-RestMethod -Uri "$base/affairs"
+$aff = Invoke-RestMethod -Uri "$base/affairs?tag=经济"
 Write-Host "affairs=$($aff.data.total)"
 
 Write-Host "SMOKE_OK"
