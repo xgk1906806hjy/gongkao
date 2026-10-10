@@ -7,6 +7,15 @@
     <input placeholder="搜索公告标题" value="{{keyword}}" bindinput="onKeyword" confirm-type="search" bindconfirm="load" />
     <button size="mini" class="btn-primary" bindtap="load">搜索</button>
   </view>
+  <view class="filters">
+    <input class="filter" placeholder="地区" value="{{region}}" bindinput="onRegion" bindconfirm="load" />
+    <picker mode="date" value="{{publishedFrom}}" bindchange="onFrom">
+      <view class="filter picker">{{publishedFrom || '发布起'}}</view>
+    </picker>
+    <picker mode="date" value="{{publishedTo}}" bindchange="onTo">
+      <view class="filter picker">{{publishedTo || '发布止'}}</view>
+    </picker>
+  </view>
   <view wx:if="{{list.length===0}}" class="empty">暂无公告</view>
   <view class="card" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" bindtap="goDetail">
     <view class="title">{{item.title}}</view>
@@ -14,5 +23,6 @@
       <text class="tag {{item.type==='institution'?'inst':''}}">{{item.type==='civil'?'公务员':'事业单位'}}</text>
       <text class="muted">{{item.region || '全国'}} · {{item.published_at}}</text>
     </view>
+    <view class="node" wx:if="{{item.node_summary}}">{{item.node_summary}}</view>
   </view>
 </view>
