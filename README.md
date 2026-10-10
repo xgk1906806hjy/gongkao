@@ -1,4 +1,4 @@
-# 公考助手
+# 公考助手（gongkao）
 
 微信小程序 + Go(Gin) + PostgreSQL + Redis。文档见 `docs/`。
 
@@ -40,14 +40,15 @@ Worker（采集 + 代办提醒）：
 go run ./cmd/worker
 ```
 
-一键启动（检测 Redis → 拉起 API + Worker）：
+一键启动（检测 Redis → 拉起 API + Worker + Web 预览）：
 
 ```bash
 powershell -ExecutionPolicy Bypass -File scripts/start-dev.ps1
 powershell -ExecutionPolicy Bypass -File scripts/smoke.ps1
 ```
 
-健康检查：`GET http://127.0.0.1:8080/health`
+健康检查：`GET http://127.0.0.1:8080/health`  
+Web 预览：`http://127.0.0.1:5173/`
 
 ### 3. 小程序
 

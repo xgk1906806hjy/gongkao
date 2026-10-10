@@ -10,7 +10,21 @@ server/logs/
 server/*.db
 server/gongkao.db
 *.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+coverage.*
+*.coverprofile
+profile.cov
 *.log
+
+# Go
+server/vendor/
+go.work
+go.work.sum
 
 # IDE / OS
 .idea/
@@ -18,9 +32,6 @@ server/gongkao.db
 .DS_Store
 Thumbs.db
 *.swp
-
-# Go
-server/vendor/
 
 # WeChat mini program
 miniapp/node_modules/
