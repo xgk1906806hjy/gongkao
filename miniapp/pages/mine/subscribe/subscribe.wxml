@@ -1,0 +1,21 @@
+<view class="container">
+  <view class="card">
+    <view class="title">代办提醒</view>
+    <view class="muted">报名/确认/考试节点到期前约 10 分钟推送。需微信订阅消息授权，授权为一次性，可重复开启。</view>
+    <view class="row">
+      <text>当前状态：{{todoStatusText}}</text>
+      <button size="mini" class="btn-primary" bindtap="subTodo">开启代办提醒</button>
+    </view>
+  </view>
+  <view class="card">
+    <view class="title">每日时政</view>
+    <view class="muted">可选每日推送最新时政摘要（需运营开启模板）。未授权时不会推送。</view>
+    <view class="row">
+      <text>当前状态：{{affairsStatusText}}</text>
+      <button size="mini" class="btn-primary" bindtap="subAffairs">开启时政推送</button>
+    </view>
+  </view>
+  <view class="card tip">
+    <view class="muted">说明：未授权订阅时，系统不会推送消息；代办列表中即将到期（24 小时内）的事项会高亮提示。</view>
+  </view>
+</view>

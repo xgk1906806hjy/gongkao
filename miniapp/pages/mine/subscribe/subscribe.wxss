@@ -1,0 +1,9 @@
+.title { font-size: 32rpx; font-weight: 700; margin-bottom: 12rpx; }
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20rpx;
+  gap: 16rpx;
+}
+.tip { background: #eef3f8; }

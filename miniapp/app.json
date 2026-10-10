@@ -11,7 +11,8 @@
     "pages/mine/exams/exams",
     "pages/mine/todos/todos",
     "pages/mine/wrong/wrong",
-    "pages/mine/favorites/favorites"
+    "pages/mine/favorites/favorites",
+    "pages/mine/subscribe/subscribe"
   ],
   "window": {
     "navigationBarTitleText": "公考助手",

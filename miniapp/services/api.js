@@ -18,36 +18,68 @@ function clearTokens() {
   wx.removeStorageSync('user')
 }
 
-function request(method, path, data, auth) {
-  const base = (app && app.globalData && app.globalData.baseURL) || 'http://127.0.0.1:8080/api/v1'
+function baseURL() {
+  return (app && app.globalData && app.globalData.baseURL) || 'http://127.0.0.1:8080/api/v1'
+}
+
+function rawRequest(method, path, data, header) {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: baseURL() + path,
+      method,
+      data,
+      header,
+      success(res) {
+        resolve(res)
+      },
+      fail: reject
+    })
+  })
+}
+
+let refreshing = null
+
+function refreshAccess() {
+  if (refreshing) return refreshing
+  const { refresh } = getTokens()
+  if (!refresh) {
+    return Promise.reject(new Error('unauthorized'))
+  }
+  refreshing = rawRequest('POST', '/auth/refresh', { refresh_token: refresh }, {
+    'Content-Type': 'application/json'
+  }).then((res) => {
+    const body = res.data || {}
+    if (res.statusCode !== 200 || body.code !== 0) {
+      clearTokens()
+      throw new Error('unauthorized')
+    }
+    setTokens(body.data.access_token, body.data.refresh_token)
+    return body.data.access_token
+  }).finally(() => {
+    refreshing = null
+  })
+  return refreshing
+}
+
+function request(method, path, data, auth, retried) {
   const header = { 'Content-Type': 'application/json' }
   if (auth !== false) {
     const { access } = getTokens()
     if (access) header.Authorization = 'Bearer ' + access
   }
-  return new Promise((resolve, reject) => {
-    wx.request({
-      url: base + path,
-      method,
-      data,
-      header,
-      success(res) {
-        if (res.statusCode === 401) {
-          clearTokens()
-          reject(new Error('unauthorized'))
-          return
-        }
-        const body = res.data || {}
-        if (body.code !== 0) {
-          reject(new Error(body.message || 'request failed'))
-          return
-        }
-        resolve(body.data)
-      },
-      fail(err) {
-        reject(err)
-      }
-    })
+  return rawRequest(method, path, data, header).then((res) => {
+    if (res.statusCode === 401 && auth !== false && !retried) {
+      return refreshAccess().then(() => request(method, path, data, auth, true))
+    }
+    if (res.statusCode === 401) {
+      clearTokens()
+      throw new Error('unauthorized')
+    }
+    const body = res.data || {}
+    if (body.code !== 0) {
+      throw new Error(body.message || 'request failed')
+    }
+    return body.data
   })
 }
 

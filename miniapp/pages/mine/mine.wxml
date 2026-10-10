@@ -1,11 +1,19 @@
 <view class="container">
   <view class="card user">
-    <view class="name">{{user.nickname || '未登录'}}</view>
+    <view class="profile">
+      <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+        <image class="avatar" src="{{avatarUrl || '/assets/tab-mine.png'}}" mode="aspectFill" />
+      </button>
+      <view class="info">
+        <input class="nickname" type="nickname" placeholder="填写昵称" value="{{nickname}}" bindinput="onNickname" bindblur="saveNickname" />
+        <view class="muted">{{user.id ? ('UID ' + user.id) : '未登录'}}</view>
+      </view>
+    </view>
     <button size="mini" class="btn-primary" bindtap="login">微信登录</button>
   </view>
   <view class="card menu" bindtap="go" data-url="/pages/mine/exams/exams">我的考试</view>
   <view class="card menu" bindtap="go" data-url="/pages/mine/todos/todos">我的代办</view>
   <view class="card menu" bindtap="go" data-url="/pages/mine/wrong/wrong">错题本</view>
   <view class="card menu" bindtap="go" data-url="/pages/mine/favorites/favorites">时政收藏</view>
-  <view class="card menu" bindtap="subscribe">开启提醒订阅</view>
+  <view class="card menu" bindtap="go" data-url="/pages/mine/subscribe/subscribe">订阅设置</view>
 </view>
