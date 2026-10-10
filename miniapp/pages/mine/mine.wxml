@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="card user">
+    <view class="name">{{user.nickname || '未登录'}}</view>
+    <button size="mini" class="btn-primary" bindtap="login">微信登录</button>
+  </view>
+  <view class="card menu" bindtap="go" data-url="/pages/mine/exams/exams">我的考试</view>
+  <view class="card menu" bindtap="go" data-url="/pages/mine/todos/todos">我的代办</view>
+  <view class="card menu" bindtap="go" data-url="/pages/mine/wrong/wrong">错题本</view>
+  <view class="card menu" bindtap="go" data-url="/pages/mine/favorites/favorites">时政收藏</view>
+  <view class="card menu" bindtap="subscribe">开启提醒订阅</view>
+</view>

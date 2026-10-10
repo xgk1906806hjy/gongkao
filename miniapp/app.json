@@ -1,0 +1,56 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/announcement/detail",
+    "pages/practice/practice",
+    "pages/practice/quiz/quiz",
+    "pages/practice/result/result",
+    "pages/affairs/affairs",
+    "pages/affairs/detail",
+    "pages/mine/mine",
+    "pages/mine/exams/exams",
+    "pages/mine/todos/todos",
+    "pages/mine/wrong/wrong",
+    "pages/mine/favorites/favorites"
+  ],
+  "window": {
+    "navigationBarTitleText": "公考助手",
+    "navigationBarBackgroundColor": "#1a4f7a",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f7fa"
+  },
+  "tabBar": {
+    "color": "#7a7a7a",
+    "selectedColor": "#1a4f7a",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "公告",
+        "iconPath": "assets/tab-home.png",
+        "selectedIconPath": "assets/tab-home-active.png"
+      },
+      {
+        "pagePath": "pages/practice/practice",
+        "text": "刷题",
+        "iconPath": "assets/tab-practice.png",
+        "selectedIconPath": "assets/tab-practice-active.png"
+      },
+      {
+        "pagePath": "pages/affairs/affairs",
+        "text": "时政",
+        "iconPath": "assets/tab-affairs.png",
+        "selectedIconPath": "assets/tab-affairs-active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "assets/tab-mine.png",
+        "selectedIconPath": "assets/tab-mine-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

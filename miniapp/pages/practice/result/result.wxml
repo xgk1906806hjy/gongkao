@@ -1,0 +1,8 @@
+<view class="container">
+  <view class="card">
+    <view class="score">正确 {{result.correct}} / {{result.total}}</view>
+    <view class="muted">正确率 {{accuracy}}</view>
+  </view>
+  <button class="btn-primary" bindtap="back">返回刷题</button>
+  <button class="btn-ghost" style="margin-top:16rpx" bindtap="wrong">查看错题本</button>
+</view>

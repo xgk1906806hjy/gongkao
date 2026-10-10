@@ -1,0 +1,13 @@
+<view class="container">
+  <view class="card" wx:for="{{groups}}" wx:key="announcement_id">
+    <view class="title">{{item.ann_title}}</view>
+    <view class="todo {{t.status}}" wx:for="{{item.todos}}" wx:for-item="t" wx:key="id">
+      <view>
+        <view>{{t.title}}</view>
+        <view class="muted">截止 {{t.due_at}} · 提醒 {{t.remind_at}}</view>
+      </view>
+      <button size="mini" wx:if="{{t.status==='pending'}}" data-id="{{t.id}}" bindtap="done">完成</button>
+    </view>
+  </view>
+  <view wx:if="{{groups.length===0}}" class="empty">暂无代办</view>
+</view>

@@ -1,0 +1,69 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: gongkao
+      POSTGRES_PASSWORD: gongkao
+      POSTGRES_DB: gongkao
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gongkao -d gongkao"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build:
+      context: ../server
+      dockerfile: Dockerfile
+      args:
+        CMD_PATH: ./cmd/api
+    env_file:
+      - ../server/.env.example
+    environment:
+      HTTP_ADDR: ":8080"
+      DATABASE_URL: postgres://gongkao:gongkao@postgres:5432/gongkao?sslmode=disable
+      REDIS_URL: redis://redis:6379/0
+      WX_MOCK: "true"
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    build:
+      context: ../server
+      dockerfile: Dockerfile
+      args:
+        CMD_PATH: ./cmd/worker
+    env_file:
+      - ../server/.env.example
+    environment:
+      DATABASE_URL: postgres://gongkao:gongkao@postgres:5432/gongkao?sslmode=disable
+      REDIS_URL: redis://redis:6379/0
+      WX_MOCK: "true"
+      CRAWLER_ENABLED: "true"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  pgdata:

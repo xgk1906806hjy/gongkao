@@ -1,0 +1,8 @@
+<view class="container">
+  <view class="card" wx:for="{{list}}" wx:key="id">
+    <view class="stem">{{item.question.stem}}</view>
+    <view class="muted">答错 {{item.wrong_count}} 次</view>
+    <button size="mini" data-id="{{item.question_id}}" bindtap="remove">移除</button>
+  </view>
+  <view wx:if="{{list.length===0}}" class="empty">暂无错题</view>
+</view>

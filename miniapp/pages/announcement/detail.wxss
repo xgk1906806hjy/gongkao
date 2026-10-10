@@ -1,0 +1,6 @@
+.title { font-size: 34rpx; font-weight: 700; margin-bottom: 12rpx; }
+.summary { margin-top: 20rpx; color: #374151; }
+.section { font-weight: 600; margin-bottom: 16rpx; }
+.line { display: flex; justify-content: space-between; padding: 12rpx 0; border-bottom: 1px solid #f0f2f5; }
+.label { color: #6b7280; }
+.join { margin-top: 24rpx; }

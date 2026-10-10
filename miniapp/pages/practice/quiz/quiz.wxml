@@ -1,0 +1,16 @@
+<view class="container" wx:if="{{q}}">
+  <view class="muted">{{index+1}} / {{total}}</view>
+  <view class="card stem">{{q.stem}}</view>
+  <view
+    class="card opt {{answers[q.id]===item.key?'on':''}}"
+    wx:for="{{q.options}}"
+    wx:key="key"
+    data-key="{{item.key}}"
+    bindtap="choose"
+  >{{item.key}}. {{item.content}}</view>
+  <view class="nav">
+    <button size="mini" disabled="{{index===0}}" bindtap="prev">上一题</button>
+    <button size="mini" wx:if="{{index<total-1}}" bindtap="next">下一题</button>
+    <button size="mini" class="btn-primary" wx:else bindtap="submit">交卷</button>
+  </view>
+</view>

@@ -1,0 +1,7 @@
+<view class="container">
+  <view class="card" wx:for="{{list}}" wx:key="id" data-id="{{item.article_id}}" bindtap="go">
+    <view class="title">{{item.article.title}}</view>
+    <view class="muted">{{item.article.source}}</view>
+  </view>
+  <view wx:if="{{list.length===0}}" class="empty">暂无收藏</view>
+</view>

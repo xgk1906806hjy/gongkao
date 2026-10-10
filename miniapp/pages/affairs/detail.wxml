@@ -1,0 +1,8 @@
+<view class="container" wx:if="{{item}}">
+  <view class="card">
+    <view class="title">{{item.title}}</view>
+    <view class="muted">{{item.source}} · {{item.published_at}}</view>
+    <view class="content">{{item.content || item.summary}}</view>
+  </view>
+  <button class="btn-primary" bindtap="fav">收藏</button>
+</view>

@@ -1,0 +1,8 @@
+<view class="container">
+  <view class="card" wx:for="{{list}}" wx:key="id">
+    <view class="title">{{item.announcement.title}}</view>
+    <view class="muted">{{item.announcement.region}}</view>
+    <button size="mini" data-id="{{item.announcement_id}}" bindtap="leave">移除</button>
+  </view>
+  <view wx:if="{{list.length===0}}" class="empty">还没有加入考试</view>
+</view>

@@ -1,0 +1,13 @@
+<view class="container">
+  <view class="card stats" wx:if="{{stats}}">
+    <view>已练 {{stats.total_answered}} 题 · 正确率 {{accuracy}}</view>
+  </view>
+  <view class="card" wx:for="{{categories}}" wx:key="id">
+    <view class="name">{{item.name}}</view>
+    <view class="actions">
+      <button size="mini" class="btn-ghost" data-id="{{item.id}}" data-mode="sequential" bindtap="start">顺序练</button>
+      <button size="mini" class="btn-primary" data-id="{{item.id}}" data-mode="random" bindtap="start">随机练</button>
+    </view>
+  </view>
+  <view wx:if="{{categories.length===0}}" class="empty">暂无分类</view>
+</view>

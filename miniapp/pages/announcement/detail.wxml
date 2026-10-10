@@ -1,0 +1,15 @@
+<view class="container" wx:if="{{item}}">
+  <view class="card">
+    <view class="title">{{item.title}}</view>
+    <view class="muted">{{item.region}} · {{item.source}} · {{item.published_at}}</view>
+    <view class="summary">{{item.summary}}</view>
+  </view>
+  <view class="card">
+    <view class="section">关键时间线</view>
+    <view class="line" wx:for="{{timeline}}" wx:key="label">
+      <text class="label">{{item.label}}</text>
+      <text class="val">{{item.value}}</text>
+    </view>
+  </view>
+  <button class="btn-primary join" bindtap="join">加入我的考试</button>
+</view>

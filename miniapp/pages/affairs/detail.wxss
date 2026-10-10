@@ -1,0 +1,2 @@
+.title { font-size: 34rpx; font-weight: 700; margin-bottom: 12rpx; }
+.content { margin-top: 24rpx; white-space: pre-wrap; color: #374151; }

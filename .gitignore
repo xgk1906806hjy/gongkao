@@ -1,0 +1,33 @@
+# env & secrets
+.env
+server/.env
+*.pem
+*.key
+
+# binaries & local data
+server/bin/
+server/logs/
+server/*.db
+server/gongkao.db
+*.exe
+*.log
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Go
+server/vendor/
+
+# WeChat mini program
+miniapp/node_modules/
+miniapp/miniprogram_npm/
+miniapp/project.private.config.json
+
+# misc
+deploy/compose-up.log
+dump.rdb
+*.rdb

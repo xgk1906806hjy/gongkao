@@ -1,0 +1,12 @@
+<view class="container">
+  <view class="search">
+    <input placeholder="搜索时政" value="{{keyword}}" bindinput="onKeyword" bindconfirm="load" />
+    <button size="mini" class="btn-primary" bindtap="load">搜索</button>
+  </view>
+  <view class="card" wx:for="{{list}}" wx:key="id" data-id="{{item.id}}" bindtap="goDetail">
+    <view class="title">{{item.title}}</view>
+    <view class="muted">{{item.source}} · {{item.published_at}}</view>
+    <view class="summary">{{item.summary}}</view>
+  </view>
+  <view wx:if="{{list.length===0}}" class="empty">暂无时政</view>
+</view>

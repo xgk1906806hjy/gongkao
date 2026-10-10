@@ -1,0 +1,3 @@
+.stem { font-size: 30rpx; font-weight: 600; }
+.opt.on { border: 2rpx solid #1a4f7a; background: #e8f1f8; }
+.nav { display: flex; justify-content: space-between; margin-top: 24rpx; gap: 16rpx; }
