@@ -96,10 +96,18 @@ func isExamRelatedTitle(title string) bool {
 }
 
 func classifyAnnouncementType(title string) string {
-	if containsAny(title, "事业", "公开招聘工作人员", "事业单位") && !containsAny(title, "公务员") {
+	if containsAny(title, "事业", "事业单位", "公开招聘") && !containsAny(title, "公务员") {
 		return model.AnnouncementInstitution
 	}
 	return model.AnnouncementCivil
+}
+
+func announcementRegion(title, fallback string) string {
+	region := guessRegion(title)
+	if fallback != "" && region == "全国" {
+		return fallback
+	}
+	return region
 }
 
 func guessRegion(title string) string {

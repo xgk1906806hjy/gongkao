@@ -39,6 +39,38 @@ func TestParseURLDate(t *testing.T) {
 	if got == nil || got.Month() != time.July || got.Day() != 27 || got.Year() != 2026 {
 		t.Fatalf("%v", got)
 	}
+	got = parseURLDate("https://www.hxw.gov.cn/content/2026/09/02/14931618.html")
+	if got == nil || got.Year() != 2026 || got.Month() != time.September || got.Day() != 2 {
+		t.Fatalf("path %v", got)
+	}
+}
+
+func TestParsePublishedAtReleaseTime(t *testing.T) {
+	got := parsePublishedAt("发布时间：2026-02-04 来源：湖南省人力资源和社会保障厅")
+	if got == nil || got.Year() != 2026 || got.Month() != time.February || got.Day() != 4 {
+		t.Fatalf("%v", got)
+	}
+}
+
+func TestSplitLeadingDate(t *testing.T) {
+	title, pub := splitLeadingDate("2026-09-18湖南省2027年定向选调公告")
+	if title != "湖南省2027年定向选调公告" {
+		t.Fatalf("title %q", title)
+	}
+	if pub.Year() != 2026 || pub.Month() != time.September || pub.Day() != 18 {
+		t.Fatalf("pub %v", pub)
+	}
+}
+
+func TestExtractTimelineOnlineRegister(t *testing.T) {
+	text := "网上注册的时间和网站：2026年1月28日9:00至2月3日17:00。网上报名的时间和网站：2026年1月29日9:00至2月4日17:00。"
+	tl := extractTimeline(text)
+	if tl.RegisterStart == nil || tl.RegisterStart.Month() != time.January || tl.RegisterStart.Day() != 29 || tl.RegisterStart.Hour() != 9 {
+		t.Fatalf("start %#v", tl.RegisterStart)
+	}
+	if tl.RegisterEnd == nil || tl.RegisterEnd.Month() != time.February || tl.RegisterEnd.Day() != 4 || tl.RegisterEnd.Hour() != 17 {
+		t.Fatalf("end %#v", tl.RegisterEnd)
+	}
 }
 
 func TestSplitTrailingDate(t *testing.T) {

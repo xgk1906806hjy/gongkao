@@ -48,6 +48,21 @@ func fetchText(ctx context.Context, client *http.Client, url string) (string, er
 	return string(body), nil
 }
 
+func fetchTextRetry(ctx context.Context, client *http.Client, url string, tries int) (string, error) {
+	if tries < 1 {
+		tries = 1
+	}
+	var err error
+	for i := 0; i < tries; i++ {
+		var text string
+		text, err = fetchText(ctx, client, url)
+		if err == nil {
+			return text, nil
+		}
+	}
+	return "", err
+}
+
 func absURL(base, href string) string {
 	href = strings.TrimSpace(href)
 	if href == "" || strings.HasPrefix(href, "javascript:") || href == "#" {
@@ -61,7 +76,7 @@ func absURL(base, href string) string {
 	if err != nil {
 		return ""
 	}
-	return bu.ResolveReference(hu).String()
+	return strings.TrimRight(bu.ResolveReference(hu).String(), "?")
 }
 
 func stripTags(s string) string {

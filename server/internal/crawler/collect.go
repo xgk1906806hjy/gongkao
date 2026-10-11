@@ -14,8 +14,11 @@ import (
 )
 
 type listPage struct {
-	name string
-	url  string
+	name     string
+	url      string
+	region   string
+	limit    int
+	maxPages int
 }
 
 type memoryAnnouncements struct {
@@ -75,7 +78,7 @@ func CollectAnnouncements(ctx context.Context, cfg *config.Config) ([]model.Anno
 	mem := &memoryAnnouncements{}
 	client := defaultHTTPClient()
 	fast := &http.Client{Timeout: 8 * time.Second}
-	detail := &http.Client{Timeout: 12 * time.Second}
+	detail := &http.Client{Timeout: 25 * time.Second}
 	r := &Runner{ann: mem, client: client}
 	sources := []Source{
 		&cptaSource{runner: r, url: "http://www.cpta.com.cn/", client: fast},
@@ -87,12 +90,22 @@ func CollectAnnouncements(ctx context.Context, cfg *config.Config) ([]model.Anno
 		},
 	}
 	for _, page := range announcementListPages(cfg) {
+		limit := page.limit
+		if limit <= 0 {
+			limit = 20
+		}
+		maxPages := page.maxPages
+		if maxPages <= 0 {
+			maxPages = 1
+		}
 		sources = append(sources, &htmlListSource{
-			runner: r,
-			name:   page.name,
-			url:    page.url,
-			client: detail,
-			limit:  20,
+			runner:   r,
+			name:     page.name,
+			url:      page.url,
+			region:   page.region,
+			client:   detail,
+			limit:    limit,
+			maxPages: maxPages,
 		})
 	}
 	var first error
@@ -113,10 +126,27 @@ func announcementListPages(cfg *config.Config) []listPage {
 		raw = cfg.CrawlerAnnouncementListURLs
 	}
 	if strings.TrimSpace(raw) == "" {
-		return []listPage{{
-			name: "hubei-rsks",
-			url:  "https://rst.hubei.gov.cn/hbrsksw/sy.shtml",
-		}}
+		return []listPage{
+			{
+				name:   "hubei-rsks",
+				url:    "https://rst.hubei.gov.cn/hbrsksw/sy.shtml",
+				region: "湖北",
+				limit:  20,
+			},
+			{
+				name:   "hunan-gwy",
+				url:    "https://rst.hunan.gov.cn/rst/hnrsksw/c103103/gwy2026/rskswlist.html",
+				region: "湖南",
+				limit:  30,
+			},
+			{
+				name:     "hunan-sydw",
+				url:      "https://rst.hunan.gov.cn/rst/xxgk/zpzl/sydwzp/",
+				region:   "湖南",
+				limit:    40,
+				maxPages: 2,
+			},
+		}
 	}
 	var out []listPage
 	for _, part := range splitCSV(raw) {

@@ -2,8 +2,10 @@ package crawler
 
 import (
 	"context"
+	"fmt"
 	"log/slog"
 	"net/http"
+	"regexp"
 	"strings"
 	"time"
 
@@ -12,11 +14,13 @@ import (
 
 // htmlListSource reads a public HTML notice index and keeps 公考 announcements.
 type htmlListSource struct {
-	runner *Runner
-	name   string
-	url    string
-	client *http.Client
-	limit  int
+	runner   *Runner
+	name     string
+	url      string
+	region   string
+	client   *http.Client
+	limit    int
+	maxPages int
 }
 
 func (s *htmlListSource) Name() string {
@@ -27,11 +31,29 @@ func (s *htmlListSource) Name() string {
 }
 
 func (s *htmlListSource) Fetch(ctx context.Context) error {
-	html, err := fetchText(ctx, s.client, s.url)
-	if err != nil {
-		return err
+	maxPages := s.maxPages
+	if maxPages <= 0 {
+		maxPages = 1
 	}
-	links := extractAnnouncementLinks(html, s.url)
+	pageURL := s.url
+	seenPage := map[string]bool{}
+	var links []cptaLink
+	for i := 0; i < maxPages; i++ {
+		if pageURL == "" || seenPage[pageURL] {
+			break
+		}
+		seenPage[pageURL] = true
+		html, err := fetchTextRetry(ctx, s.client, pageURL, 2)
+		if err != nil {
+			if i == 0 {
+				return err
+			}
+			slog.Warn("announcement list page skipped", "source", s.Name(), "url", pageURL, "err", err)
+			break
+		}
+		links = append(links, extractAnnouncementLinks(html, pageURL)...)
+		pageURL = nextListPage(html, pageURL)
+	}
 	n := 0
 	for _, lk := range links {
 		if s.limit > 0 && n >= s.limit {
@@ -48,28 +70,53 @@ func (s *htmlListSource) Fetch(ctx context.Context) error {
 	return nil
 }
 
+var (
+	reAnchor    = regexp.MustCompile(`(?is)<a\b([^>]*)>(.*?)</a>`)
+	reHrefAttr  = regexp.MustCompile(`(?is)\bhref\s*=\s*["']([^"']+)["']`)
+	reTitleAttr = regexp.MustCompile(`(?is)\btitle\s*=\s*["']([^"']+)["']`)
+	reListPage  = regexp.MustCompile(`createPageHTML\(\s*'[^']+'\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*'([^']+)'\s*,\s*'([^']+)'`)
+)
+
 func extractAnnouncementLinks(html, base string) []cptaLink {
 	seen := map[string]bool{}
 	var out []cptaLink
-	add := func(href, title string) {
+	for _, m := range reAnchor.FindAllStringSubmatch(html, -1) {
+		hm := reHrefAttr.FindStringSubmatch(m[1])
+		if hm == nil {
+			continue
+		}
+		title := ""
+		if tm := reTitleAttr.FindStringSubmatch(m[1]); tm != nil {
+			title = tm[1]
+		}
+		if strings.TrimSpace(stripTags(title)) == "" {
+			title = stripTags(m[2])
+		}
 		title = strings.TrimSpace(stripTags(title))
-		href = absURL(base, href)
+		href := absURL(base, hm[1])
 		if href == "" || title == "" || seen[href] {
-			return
+			continue
 		}
 		if !looksLikeDocLink(href) || !isGongkaoAnnouncementTitle(title) {
-			return
+			continue
 		}
 		seen[href] = true
 		out = append(out, cptaLink{href: href, title: title})
 	}
-	for _, m := range reAnchorTitle.FindAllStringSubmatch(html, -1) {
-		add(m[1], m[2])
-	}
-	for _, m := range reAnchorText.FindAllStringSubmatch(html, -1) {
-		add(m[1], m[2])
-	}
 	return out
+}
+
+func nextListPage(html, pageURL string) string {
+	m := reListPage.FindStringSubmatch(html)
+	if m == nil {
+		return ""
+	}
+	total, curr := atoi(m[1]), atoi(m[2])
+	if curr < 1 || curr >= total {
+		return ""
+	}
+	nextName := fmt.Sprintf("%s_%d.%s", m[3], curr+1, m[4])
+	return absURL(pageURL, nextName)
 }
 
 func looksLikeDocLink(href string) bool {
@@ -86,6 +133,9 @@ func isGongkaoAnnouncementTitle(title string) bool {
 
 func (s *htmlListSource) build(ctx context.Context, lk cptaLink) *model.Announcement {
 	title, pub := splitTrailingDate(lk.title, time.Now())
+	if pub.IsZero() {
+		title, pub = splitLeadingDate(title)
+	}
 	if pub.IsZero() {
 		if t := parseURLDate(lk.href); t != nil {
 			pub = *t
@@ -114,7 +164,7 @@ func (s *htmlListSource) build(ctx context.Context, lk cptaLink) *model.Announce
 	return &model.Announcement{
 		Type:          classifyAnnouncementType(title),
 		Title:         title,
-		Region:        guessRegion(title),
+		Region:        announcementRegion(title, s.region),
 		Source:        s.Name(),
 		SourceID:      shortHash(lk.href),
 		SourceURL:     lk.href,

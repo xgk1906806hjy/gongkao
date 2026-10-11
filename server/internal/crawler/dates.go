@@ -19,13 +19,14 @@ var (
 	reLooseDate = regexp.MustCompile(`(?:(\d{4})\s*年\s*)?(\d{1,2})\s*月\s*(\d{1,2})\s*日(?:\s*(\d{1,2})\s*[:：]\s*(\d{2}))?`)
 	reTrailYMD  = regexp.MustCompile(`(20\d{2})-(\d{2})-(\d{2})\s*$`)
 	reTrailMD   = regexp.MustCompile(`(\d{2})-(\d{2})\s*$`)
-	rePublished = regexp.MustCompile(`发布日期[:：\s]*(\d{4})\s*[-年/]\s*(\d{1,2})\s*[-月/]\s*(\d{1,2})`)
+	rePublished = regexp.MustCompile(`(?:发布时间|发布日期)[:：\s]*(\d{4})\s*[-年/]\s*(\d{1,2})\s*[-月/]\s*(\d{1,2})`)
+	reLeadYMD   = regexp.MustCompile(`^(20\d{2})-(\d{2})-(\d{2})\s*`)
 )
 
 func extractTimeline(text string) timeline {
 	text = strings.Join(strings.Fields(text), " ")
 	var tl timeline
-	if w := keywordWindow(text, []string{"报名时间", "网上报名时间", "报名"}, 160); w != "" {
+	if w := keywordWindow(text, []string{"报名时间", "网上报名时间", "网上报名", "网上注册", "报名"}, 160); w != "" {
 		ds := parseLooseDates(w)
 		if len(ds) > 0 {
 			tl.RegisterStart = &ds[0]
@@ -121,10 +122,30 @@ func splitTrailingDate(title string, now time.Time) (string, time.Time) {
 	return title, time.Time{}
 }
 
-var reURLDate = regexp.MustCompile(`t(20\d{2})(\d{2})(\d{2})`)
+func splitLeadingDate(title string) (string, time.Time) {
+	title = strings.TrimSpace(title)
+	m := reLeadYMD.FindStringSubmatch(title)
+	if m == nil {
+		return title, time.Time{}
+	}
+	month, day := atoi(m[2]), atoi(m[3])
+	if month < 1 || month > 12 || day < 1 || day > 31 {
+		return title, time.Time{}
+	}
+	t := time.Date(atoi(m[1]), time.Month(month), day, 0, 0, 0, 0, time.Local)
+	return strings.TrimSpace(title[len(m[0]):]), t
+}
+
+var (
+	reURLDate  = regexp.MustCompile(`t(20\d{2})(\d{2})(\d{2})`)
+	rePathDate = regexp.MustCompile(`/(20\d{2})/(\d{2})/(\d{2})(?:/|$)`)
+)
 
 func parseURLDate(raw string) *time.Time {
 	m := reURLDate.FindStringSubmatch(raw)
+	if m == nil {
+		m = rePathDate.FindStringSubmatch(raw)
+	}
 	if m == nil {
 		return nil
 	}
