@@ -1,6 +1,9 @@
 package crawler
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func TestExtractAnnouncementLinks(t *testing.T) {
 	html := `
@@ -41,6 +44,25 @@ func TestExtractHunanAnnouncementLinks(t *testing.T) {
 	}
 	if links[3].href != "https://www.hxw.gov.cn/content/2026/05/14/14895048.html" {
 		t.Fatalf("query href %s", links[3].href)
+	}
+}
+
+func TestStripTagsDropsScript(t *testing.T) {
+	in := `<title>湖南省2027年定向选调公告</title><script>$(document).ready(function(){ var url = location.href; })</script><div>根据选调生工作的规定公告如下。</div>`
+	got := stripTags(in)
+	if strings.Contains(got, "document") || strings.Contains(got, "location") {
+		t.Fatalf("script leaked: %q", got)
+	}
+	if !strings.Contains(got, "公告如下") {
+		t.Fatalf("body missing: %q", got)
+	}
+}
+
+func TestAnnouncementExcerptStartsAtTitle(t *testing.T) {
+	text := "首页 机构设置 湖南省2027年定向选调公告 首页 湖南省2027年定向选调公告 根据选调生工作的规定和要求，现就定向选调有关事项公告如下。"
+	got := announcementExcerpt(text, "湖南省2027年定向选调公告")
+	if !strings.HasPrefix(got, "湖南省2027年定向选调公告 根据选调生") {
+		t.Fatalf("%q", got)
 	}
 }
 

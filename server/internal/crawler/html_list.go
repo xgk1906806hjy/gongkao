@@ -150,7 +150,7 @@ func (s *htmlListSource) build(ctx context.Context, lk cptaLink) *model.Announce
 			pub = *t
 		}
 		tl = extractTimeline(text)
-		excerpt := truncateRunes(text, 500)
+		excerpt := announcementExcerpt(text, title)
 		if excerpt != "" {
 			summary = truncateRunes(excerpt, 180)
 			content = excerpt

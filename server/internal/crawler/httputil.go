@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"regexp"
 	"strings"
 	"time"
 )
@@ -79,7 +80,10 @@ func absURL(base, href string) string {
 	return strings.TrimRight(bu.ResolveReference(hu).String(), "?")
 }
 
+var reScriptStyle = regexp.MustCompile(`(?is)<script\b[^>]*>.*?</script>|<style\b[^>]*>.*?</style>|<!--.*?-->`)
+
 func stripTags(s string) string {
+	s = reScriptStyle.ReplaceAllString(s, " ")
 	var b strings.Builder
 	in := false
 	for _, r := range s {
@@ -93,8 +97,30 @@ func stripTags(s string) string {
 		}
 	}
 	out := strings.TrimSpace(b.String())
-	out = strings.ReplaceAll(out, "\u00a0", " ")
+	out = strings.NewReplacer(
+		"&nbsp;", " ",
+		"&#160;", " ",
+		"&amp;", "&",
+		"&lt;", "<",
+		"&gt;", ">",
+		"&quot;", "\"",
+		"&#39;", "'",
+		"\u00a0", " ",
+	).Replace(out)
 	return strings.Join(strings.Fields(out), " ")
+}
+
+// announcementExcerpt keeps the article body. List pages repeat the title in
+// navigation, so the excerpt starts at the last title occurrence.
+func announcementExcerpt(text, title string) string {
+	text = strings.TrimSpace(text)
+	title = strings.TrimSpace(title)
+	if title != "" {
+		if i := strings.LastIndex(text, title); i >= 0 {
+			text = strings.TrimSpace(text[i:])
+		}
+	}
+	return truncateRunes(text, 500)
 }
 
 func truncateRunes(s string, n int) string {
