@@ -1,6 +1,8 @@
 # 公考助手（gongkao）
 
-微信小程序 + Go(Gin) + PostgreSQL + Redis。文档见 `docs/`。
+微信小程序 + Go(Gin) + PostgreSQL + Redis。
+
+**文档：** [项目文档](docs/项目文档.md)（总览）· [需求文档](docs/需求文档.md) · [开发方案](docs/开发方案.md) · [API](docs/API.md)
 
 ## 快速启动
 
@@ -65,4 +67,4 @@ Web 预览：`http://127.0.0.1:5173/`
 | 时政 | 定时采集：新华网/人民网 RSS；标签筛选、收藏；可选每日推送 |
 | 管理 | `POST /api/v1/admin/login` 默认 `admin/admin123`；题目 CRUD / CSV 导入 |
 
-更细的需求与方案：`docs/需求文档.md`、`docs/开发方案.md`。
+完整说明见 [`docs/项目文档.md`](docs/项目文档.md)。
