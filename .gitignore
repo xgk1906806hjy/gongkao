@@ -42,3 +42,5 @@ miniapp/project.private.config.json
 deploy/compose-up.log
 dump.rdb
 *.rdb
+server/tmp_*.html
+server/scripts/__pycache__/

@@ -53,3 +53,15 @@ Base: `/api/v1`
 - `POST /admin/questions/import` JSON `{ "items": [...] }` 或 `Content-Type: text/csv`（表头 `category,stem,answer_key,analysis,difficulty,tags,A,B,C,D`）
 - `GET/POST /admin/affairs`，`PATCH /admin/affairs/:id`
 - `GET /admin/crawl-failures`
+
+## Crawler（Worker）
+
+Worker 约每 30 分钟执行一次（`CRAWLER_ENABLED=true`）。内置源：
+
+| 源 | 类型 | 地址 |
+|---|---|---|
+| `cpta` | 公告+时政 | 中国人事考试网首页链接 |
+| `gov-zhengce` | 公告（招考关键词过滤） | `gov.cn/.../ZUIXINZHENGCE.json` |
+| `xinhua-politics` / `people-politics` / `xinhua-legal` | 时政 RSS | 新华网 / 人民网 |
+
+本地可手动：`cd server && go run ./cmd/crawlonce`。无外网数据时，`CRAWLER_SEED_FALLBACK=true` 会写入演示种子。

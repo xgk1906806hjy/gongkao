@@ -49,7 +49,9 @@ type Config struct {
 	WXSubscribeTemplateTodo  string
 	WXSubscribeTemplateAff   string
 	CrawlerEnabled           bool
-	CrawlerAffairsRSSURL     string
+	CrawlerSeedFallback      bool
+	CrawlerAffairsRSSURL     string // legacy single URL
+	CrawlerAffairsRSSURLs    string // comma-separated extra RSS URLs
 	AffairsDailyPushEnabled  bool
 	SessionKeyAESKey         string
 	AdminBootstrapUser       string
@@ -71,7 +73,9 @@ func Load() *Config {
 		WXSubscribeTemplateTodo:  os.Getenv("WX_SUBSCRIBE_TEMPLATE_TODO"),
 		WXSubscribeTemplateAff:   os.Getenv("WX_SUBSCRIBE_TEMPLATE_AFFAIRS"),
 		CrawlerEnabled:           boolEnv("CRAWLER_ENABLED", true),
+		CrawlerSeedFallback:      boolEnv("CRAWLER_SEED_FALLBACK", true),
 		CrawlerAffairsRSSURL:     os.Getenv("CRAWLER_AFFAIRS_RSS_URL"),
+		CrawlerAffairsRSSURLs:    os.Getenv("CRAWLER_AFFAIRS_RSS_URLS"),
 		AffairsDailyPushEnabled:  boolEnv("AFFAIRS_DAILY_PUSH_ENABLED", false),
 		SessionKeyAESKey:         getenv("SESSION_KEY_AES_KEY", "0123456789abcdef0123456789abcdef"),
 		AdminBootstrapUser:       getenv("ADMIN_BOOTSTRAP_USER", "admin"),
