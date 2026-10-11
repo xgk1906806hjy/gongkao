@@ -2,7 +2,7 @@
 
 微信小程序 + Go(Gin) + PostgreSQL + Redis。
 
-**文档：** [项目文档](docs/项目文档.md)（总览）· [需求文档](docs/需求文档.md) · [开发方案](docs/开发方案.md) · [API](docs/API.md)
+**文档：** [项目文档](docs/项目文档.md)（总览）· [功能模块 doc/](doc/README.md) · [需求文档](docs/需求文档.md) · [开发方案](docs/开发方案.md) · [API](docs/API.md)
 
 ## 快速启动
 
