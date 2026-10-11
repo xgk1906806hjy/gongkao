@@ -64,6 +64,11 @@ func TestAnnouncementExcerptStartsAtTitle(t *testing.T) {
 	if !strings.HasPrefix(got, "湖南省2027年定向选调公告 根据选调生") {
 		t.Fatalf("%q", got)
 	}
+	text = "岳麓山实验室、湖南省农业科学院2026年公开招聘公告 - 首页 政务公开 岳麓山实验室、湖南省农业科学院2026年公开招聘公告 湖南省人力资源和社会保障厅 发布时间： 2026-09-17 岳麓山实验室是湖南省委、省政府高标准建设的现代农业实验室，实验室以种业为核心。 岳麓山实验室、湖南省农业科学院2026年公开招聘公告 34066590"
+	got = announcementExcerpt(text, "岳麓山实验室、湖南省农业科学院2026年公开招聘公告")
+	if !strings.Contains(got, "现代农业实验室") || strings.Contains(got[:40], "政务公开") {
+		t.Fatalf("%q", got)
+	}
 }
 
 func TestNextListPage(t *testing.T) {

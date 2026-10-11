@@ -110,17 +110,43 @@ func stripTags(s string) string {
 	return strings.Join(strings.Fields(out), " ")
 }
 
-// announcementExcerpt keeps the article body. List pages repeat the title in
-// navigation, so the excerpt starts at the last title occurrence.
+// announcementExcerpt keeps the article body. The title is repeated in the
+// document title, the navigation, and sometimes a trailing file id. The body
+// is the copy that is followed by sentence punctuation.
 func announcementExcerpt(text, title string) string {
 	text = strings.TrimSpace(text)
 	title = strings.TrimSpace(title)
-	if title != "" {
-		if i := strings.LastIndex(text, title); i >= 0 {
-			text = strings.TrimSpace(text[i:])
+	if title == "" || !strings.Contains(text, title) {
+		return truncateRunes(text, 500)
+	}
+	var idxs []int
+	from := 0
+	for from < len(text) {
+		rel := strings.Index(text[from:], title)
+		if rel < 0 {
+			break
+		}
+		idxs = append(idxs, from+rel)
+		from += rel + len(title)
+	}
+	best := idxs[0]
+	bestScore := -1
+	for n, i := range idxs {
+		end := len(text)
+		if n+1 < len(idxs) {
+			end = idxs[n+1]
+		}
+		seg := text[i:end]
+		if rs := []rune(seg); len(rs) > 800 {
+			seg = string(rs[:800])
+		}
+		score := strings.Count(seg, "。")*5 + strings.Count(seg, "，")
+		if score > bestScore {
+			bestScore = score
+			best = i
 		}
 	}
-	return truncateRunes(text, 500)
+	return truncateRunes(strings.TrimSpace(text[best:]), 500)
 }
 
 func truncateRunes(s string, n int) string {
