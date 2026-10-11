@@ -20,9 +20,14 @@ type Source interface {
 	Fetch(ctx context.Context) error
 }
 
+// announcementWriter stores crawled announcements. The API service and the Excel collector both implement it.
+type announcementWriter interface {
+	UpsertFromCrawl(a *model.Announcement) error
+}
+
 type Runner struct {
 	db      *gorm.DB
-	ann     *service.AnnouncementService
+	ann     announcementWriter
 	aff     *service.AffairsService
 	sources []Source
 	client  *http.Client
@@ -57,17 +62,17 @@ func buildSources(r *Runner, cfg *config.Config) []Source {
 		},
 		&rssAffairsSource{
 			runner: r, name: "xinhua-politics", tag: "时政,新华网",
-			url: "http://www.news.cn/politics/news_politics.xml",
+			url:    "http://www.news.cn/politics/news_politics.xml",
 			client: r.client, limit: 40,
 		},
 		&rssAffairsSource{
 			runner: r, name: "people-politics", tag: "时政,人民网",
-			url: "http://www.people.com.cn/rss/politics.xml",
+			url:    "http://www.people.com.cn/rss/politics.xml",
 			client: r.client, limit: 40,
 		},
 		&rssAffairsSource{
 			runner: r, name: "xinhua-legal", tag: "法治,新华网",
-			url: "http://www.xinhuanet.com/legal/news_legal.xml",
+			url:    "http://www.xinhuanet.com/legal/news_legal.xml",
 			client: r.client, limit: 20,
 		},
 	)
@@ -120,6 +125,9 @@ func (r *Runner) RunOnce(ctx context.Context) {
 }
 
 func (r *Runner) recordFailure(source, url string, err error) error {
+	if r.db == nil {
+		return nil
+	}
 	return r.db.Create(&model.CrawlFailure{
 		Source: source, URL: url, Error: err.Error(), CreatedAt: time.Now(),
 	}).Error

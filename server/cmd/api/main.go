@@ -50,7 +50,13 @@ func main() {
 	_ = pracSvc.SeedIfEmpty()
 	_ = affSvc.SeedIfEmpty()
 
-	// seed announcements once via crawler
+	if n, err := annSvc.ImportFromXLSX(cfg.AnnouncementXLSX); err != nil {
+		slog.Warn("announcement xlsx import", "err", err, "path", cfg.AnnouncementXLSX)
+	} else if n > 0 {
+		slog.Info("announcements imported from xlsx", "count", n, "path", cfg.AnnouncementXLSX)
+	}
+
+	// affairs crawl, plus announcement seed only when no live rows exist
 	crawler.NewRunner(db, annSvc, affSvc, cfg).RunOnce(nil)
 
 	h := &handler.Handlers{
@@ -66,9 +72,9 @@ func main() {
 				affTpl = "MOCK_AFFAIRS_TEMPLATE"
 			}
 			return gin.H{
-				"todo_template_id":     todoTpl,
-				"affairs_template_id":  affTpl,
-				"wx_mock":              cfg.WXMock,
+				"todo_template_id":    todoTpl,
+				"affairs_template_id": affTpl,
+				"wx_mock":             cfg.WXMock,
 			}
 		},
 	}

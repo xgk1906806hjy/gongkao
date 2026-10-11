@@ -36,50 +36,54 @@ func LoadDotEnv(paths ...string) {
 }
 
 type Config struct {
-	AppEnv                   string
-	HTTPAddr                 string
-	DatabaseURL              string
-	RedisURL                 string
-	JWTSecret                string
-	JWTAccessTTL             time.Duration
-	JWTRefreshTTL            time.Duration
-	WXAppID                  string
-	WXSecret                 string
-	WXMock                   bool
-	WXSubscribeTemplateTodo  string
-	WXSubscribeTemplateAff   string
-	CrawlerEnabled           bool
-	CrawlerSeedFallback      bool
-	CrawlerAffairsRSSURL     string // legacy single URL
-	CrawlerAffairsRSSURLs    string // comma-separated extra RSS URLs
-	AffairsDailyPushEnabled  bool
-	SessionKeyAESKey         string
-	AdminBootstrapUser       string
-	AdminBootstrapPass       string
+	AppEnv                      string
+	HTTPAddr                    string
+	DatabaseURL                 string
+	RedisURL                    string
+	JWTSecret                   string
+	JWTAccessTTL                time.Duration
+	JWTRefreshTTL               time.Duration
+	WXAppID                     string
+	WXSecret                    string
+	WXMock                      bool
+	WXSubscribeTemplateTodo     string
+	WXSubscribeTemplateAff      string
+	CrawlerEnabled              bool
+	CrawlerSeedFallback         bool
+	CrawlerAffairsRSSURL        string // legacy single URL
+	CrawlerAffairsRSSURLs       string // comma-separated extra RSS URLs
+	CrawlerAnnouncementListURLs string // optional name|url pairs, comma-separated
+	AnnouncementXLSX            string
+	AffairsDailyPushEnabled     bool
+	SessionKeyAESKey            string
+	AdminBootstrapUser          string
+	AdminBootstrapPass          string
 }
 
 func Load() *Config {
 	return &Config{
-		AppEnv:                   getenv("APP_ENV", "dev"),
-		HTTPAddr:                 getenv("HTTP_ADDR", ":8080"),
-		DatabaseURL:              getenv("DATABASE_URL", "postgres://gongkao:gongkao@127.0.0.1:5432/gongkao?sslmode=disable"),
-		RedisURL:                 getenv("REDIS_URL", "redis://127.0.0.1:6379/0"),
-		JWTSecret:                getenv("JWT_SECRET", "gongkao-dev-secret-change-me"),
-		JWTAccessTTL:             durationEnv("JWT_ACCESS_TTL", 2*time.Hour),
-		JWTRefreshTTL:            durationEnv("JWT_REFRESH_TTL", 720*time.Hour),
-		WXAppID:                  os.Getenv("WX_APPID"),
-		WXSecret:                 os.Getenv("WX_SECRET"),
-		WXMock:                   boolEnv("WX_MOCK", true),
-		WXSubscribeTemplateTodo:  os.Getenv("WX_SUBSCRIBE_TEMPLATE_TODO"),
-		WXSubscribeTemplateAff:   os.Getenv("WX_SUBSCRIBE_TEMPLATE_AFFAIRS"),
-		CrawlerEnabled:           boolEnv("CRAWLER_ENABLED", true),
-		CrawlerSeedFallback:      boolEnv("CRAWLER_SEED_FALLBACK", true),
-		CrawlerAffairsRSSURL:     os.Getenv("CRAWLER_AFFAIRS_RSS_URL"),
-		CrawlerAffairsRSSURLs:    os.Getenv("CRAWLER_AFFAIRS_RSS_URLS"),
-		AffairsDailyPushEnabled:  boolEnv("AFFAIRS_DAILY_PUSH_ENABLED", false),
-		SessionKeyAESKey:         getenv("SESSION_KEY_AES_KEY", "0123456789abcdef0123456789abcdef"),
-		AdminBootstrapUser:       getenv("ADMIN_BOOTSTRAP_USER", "admin"),
-		AdminBootstrapPass:       getenv("ADMIN_BOOTSTRAP_PASS", "admin123"),
+		AppEnv:                      getenv("APP_ENV", "dev"),
+		HTTPAddr:                    getenv("HTTP_ADDR", ":8080"),
+		DatabaseURL:                 getenv("DATABASE_URL", "postgres://gongkao:gongkao@127.0.0.1:5432/gongkao?sslmode=disable"),
+		RedisURL:                    getenv("REDIS_URL", "redis://127.0.0.1:6379/0"),
+		JWTSecret:                   getenv("JWT_SECRET", "gongkao-dev-secret-change-me"),
+		JWTAccessTTL:                durationEnv("JWT_ACCESS_TTL", 2*time.Hour),
+		JWTRefreshTTL:               durationEnv("JWT_REFRESH_TTL", 720*time.Hour),
+		WXAppID:                     os.Getenv("WX_APPID"),
+		WXSecret:                    os.Getenv("WX_SECRET"),
+		WXMock:                      boolEnv("WX_MOCK", true),
+		WXSubscribeTemplateTodo:     os.Getenv("WX_SUBSCRIBE_TEMPLATE_TODO"),
+		WXSubscribeTemplateAff:      os.Getenv("WX_SUBSCRIBE_TEMPLATE_AFFAIRS"),
+		CrawlerEnabled:              boolEnv("CRAWLER_ENABLED", true),
+		CrawlerSeedFallback:         boolEnv("CRAWLER_SEED_FALLBACK", true),
+		CrawlerAffairsRSSURL:        os.Getenv("CRAWLER_AFFAIRS_RSS_URL"),
+		CrawlerAffairsRSSURLs:       os.Getenv("CRAWLER_AFFAIRS_RSS_URLS"),
+		CrawlerAnnouncementListURLs: os.Getenv("CRAWLER_ANNOUNCEMENT_LIST_URLS"),
+		AnnouncementXLSX:            getenv("ANNOUNCEMENT_XLSX", "data/announcements.xlsx"),
+		AffairsDailyPushEnabled:     boolEnv("AFFAIRS_DAILY_PUSH_ENABLED", false),
+		SessionKeyAESKey:            getenv("SESSION_KEY_AES_KEY", "0123456789abcdef0123456789abcdef"),
+		AdminBootstrapUser:          getenv("ADMIN_BOOTSTRAP_USER", "admin"),
+		AdminBootstrapPass:          getenv("ADMIN_BOOTSTRAP_PASS", "admin123"),
 	}
 }
 

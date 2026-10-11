@@ -43,4 +43,5 @@ deploy/compose-up.log
 dump.rdb
 *.rdb
 server/tmp_*.html
+server/data/
 server/scripts/__pycache__/

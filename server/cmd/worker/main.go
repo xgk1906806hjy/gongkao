@@ -53,10 +53,24 @@ func main() {
 	_, _ = c.AddFunc("@every 1m", func() {
 		remindSvc.ProcessDue(context.Background())
 	})
+	refreshAnnouncements := func(ctx context.Context) {
+		if _, err := crawler.WriteAnnouncementWorkbook(ctx, cfg); err != nil {
+			slog.Error("announcement workbook", "err", err)
+		}
+		n, err := annSvc.ImportFromXLSX(cfg.AnnouncementXLSX)
+		if err != nil {
+			slog.Error("announcement xlsx import", "err", err)
+			return
+		}
+		slog.Info("announcements imported from xlsx", "count", n, "path", cfg.AnnouncementXLSX)
+	}
 	if cfg.CrawlerEnabled {
 		_, _ = c.AddFunc("@every 30m", func() {
-			runner.RunOnce(context.Background())
+			bg := context.Background()
+			refreshAnnouncements(bg)
+			runner.RunOnce(bg)
 		})
+		refreshAnnouncements(ctx)
 		runner.RunOnce(ctx)
 	}
 	if cfg.AffairsDailyPushEnabled {

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"strings"
 	"time"
 )
@@ -52,23 +53,15 @@ func absURL(base, href string) string {
 	if href == "" || strings.HasPrefix(href, "javascript:") || href == "#" {
 		return ""
 	}
-	if strings.HasPrefix(href, "http://") || strings.HasPrefix(href, "https://") {
-		return href
+	bu, err := url.Parse(base)
+	if err != nil {
+		return ""
 	}
-	if strings.HasPrefix(href, "//") {
-		return "https:" + href
+	hu, err := url.Parse(href)
+	if err != nil {
+		return ""
 	}
-	base = strings.TrimRight(base, "/")
-	if strings.HasPrefix(href, "/") {
-		if i := strings.Index(base, "://"); i >= 0 {
-			rest := base[i+3:]
-			if j := strings.Index(rest, "/"); j >= 0 {
-				return base[:i+3] + rest[:j] + href
-			}
-			return base + href
-		}
-	}
-	return base + "/" + strings.TrimLeft(href, "/")
+	return bu.ResolveReference(hu).String()
 }
 
 func stripTags(s string) string {

@@ -107,7 +107,7 @@ func (s *AnnouncementService) UpsertFromCrawl(a *model.Announcement) error {
 	if err != nil {
 		return err
 	}
-	return s.db.Model(&existing).Updates(map[string]interface{}{
+	updates := map[string]interface{}{
 		"title":          a.Title,
 		"region":         a.Region,
 		"source_url":     a.SourceURL,
@@ -118,5 +118,15 @@ func (s *AnnouncementService) UpsertFromCrawl(a *model.Announcement) error {
 		"confirm_end":    a.ConfirmEnd,
 		"exam_at":        a.ExamAt,
 		"published_at":   a.PublishedAt,
-	}).Error
+	}
+	if a.Type != "" {
+		updates["type"] = a.Type
+	}
+	if a.Content != "" {
+		updates["content"] = a.Content
+	}
+	if a.Status != "" {
+		updates["status"] = a.Status
+	}
+	return s.db.Model(&existing).Updates(updates).Error
 }
