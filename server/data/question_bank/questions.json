@@ -1,0 +1,2550 @@
+[
+  {
+    "category": "行测-言语理解",
+    "stem": "填入画横线部分最恰当的一项：面对复杂局面，更要____，稳住阵脚。",
+    "answer_key": "B",
+    "analysis": "“沉着冷静”强调不慌乱，契合“稳住阵脚”。",
+    "difficulty": 1,
+    "tags": "逻辑填空",
+    "options": [
+      {
+        "key": "A",
+        "content": "一蹴而就"
+      },
+      {
+        "key": "B",
+        "content": "沉着冷静"
+      },
+      {
+        "key": "C",
+        "content": "纸上谈兵"
+      },
+      {
+        "key": "D",
+        "content": "随波逐流"
+      }
+    ]
+  },
+  {
+    "category": "行测-言语理解",
+    "stem": "“见贤思齐焉，见不贤而内自省也”强调的是：",
+    "answer_key": "C",
+    "analysis": "语出《论语》，强调以他人为镜自我提升与反省。",
+    "difficulty": 1,
+    "tags": "语句理解",
+    "options": [
+      {
+        "key": "A",
+        "content": "安贫乐道"
+      },
+      {
+        "key": "B",
+        "content": "因材施教"
+      },
+      {
+        "key": "C",
+        "content": "对照反思"
+      },
+      {
+        "key": "D",
+        "content": "独善其身"
+      }
+    ]
+  },
+  {
+    "category": "行测-言语理解",
+    "stem": "下列成语中，感情色彩偏贬义的是：",
+    "answer_key": "A",
+    "analysis": "“哗众取宠”指用浮夸言行博取关注，含贬义。",
+    "difficulty": 1,
+    "tags": "成语",
+    "options": [
+      {
+        "key": "A",
+        "content": "哗众取宠"
+      },
+      {
+        "key": "B",
+        "content": "持之以恒"
+      },
+      {
+        "key": "C",
+        "content": "实事求是"
+      },
+      {
+        "key": "D",
+        "content": "精益求精"
+      }
+    ]
+  },
+  {
+    "category": "行测-言语理解",
+    "stem": "一段文字先提出问题，再分析原因，最后给出对策。这种结构属于：",
+    "answer_key": "B",
+    "analysis": "提出问题—分析原因—提出对策。",
+    "difficulty": 1,
+    "tags": "文段结构",
+    "options": [
+      {
+        "key": "A",
+        "content": "总分总"
+      },
+      {
+        "key": "B",
+        "content": "提出-分析-解决"
+      },
+      {
+        "key": "C",
+        "content": "并列"
+      },
+      {
+        "key": "D",
+        "content": "转折"
+      }
+    ]
+  },
+  {
+    "category": "行测-言语理解",
+    "stem": "“公考备考贵在坚持”中，“贵”的意思最接近：",
+    "answer_key": "D",
+    "analysis": "此处“贵”表示“可贵、重要”。",
+    "difficulty": 1,
+    "tags": "词语理解",
+    "options": [
+      {
+        "key": "A",
+        "content": "价格高"
+      },
+      {
+        "key": "B",
+        "content": "贵族"
+      },
+      {
+        "key": "C",
+        "content": "昂贵"
+      },
+      {
+        "key": "D",
+        "content": "可贵"
+      }
+    ]
+  },
+  {
+    "category": "行测-言语理解",
+    "stem": "与“春风又绿江南岸”修辞手法相同的是：",
+    "answer_key": "A",
+    "analysis": "“绿”为形容词用作动词，与“红了樱桃”同类。",
+    "difficulty": 1,
+    "tags": "修辞",
+    "options": [
+      {
+        "key": "A",
+        "content": "红了樱桃"
+      },
+      {
+        "key": "B",
+        "content": "飞流直下"
+      },
+      {
+        "key": "C",
+        "content": "大珠小珠"
+      },
+      {
+        "key": "D",
+        "content": "疑是银河"
+      }
+    ]
+  },
+  {
+    "category": "行测-言语理解",
+    "stem": "主旨概括题中，转折之后的内容通常：",
+    "answer_key": "B",
+    "analysis": "转折后往往是作者强调的重点。",
+    "difficulty": 1,
+    "tags": "主旨概括",
+    "options": [
+      {
+        "key": "A",
+        "content": "可忽略"
+      },
+      {
+        "key": "B",
+        "content": "更重要"
+      },
+      {
+        "key": "C",
+        "content": "与前文并列"
+      },
+      {
+        "key": "D",
+        "content": "只举例"
+      }
+    ]
+  },
+  {
+    "category": "行测-言语理解",
+    "stem": "“不仅……而且……”体现的逻辑关系是：",
+    "answer_key": "C",
+    "analysis": "表示递进关系。",
+    "difficulty": 1,
+    "tags": "关联词",
+    "options": [
+      {
+        "key": "A",
+        "content": "因果"
+      },
+      {
+        "key": "B",
+        "content": "转折"
+      },
+      {
+        "key": "C",
+        "content": "递进"
+      },
+      {
+        "key": "D",
+        "content": "条件"
+      }
+    ]
+  },
+  {
+    "category": "行测-言语理解",
+    "stem": "下列句子没有语病的是：",
+    "answer_key": "D",
+    "analysis": "D主谓宾完整。",
+    "difficulty": 1,
+    "tags": "病句",
+    "options": [
+      {
+        "key": "A",
+        "content": "通过学习使我提高"
+      },
+      {
+        "key": "B",
+        "content": "大约有将近百人"
+      },
+      {
+        "key": "C",
+        "content": "理由是因为天气"
+      },
+      {
+        "key": "D",
+        "content": "我们按计划完成了任务"
+      }
+    ]
+  },
+  {
+    "category": "行测-言语理解",
+    "stem": "片段阅读中，“因此”引导的句子常是：",
+    "answer_key": "A",
+    "analysis": "结论词后多为文段观点或主旨。",
+    "difficulty": 1,
+    "tags": "主旨概括",
+    "options": [
+      {
+        "key": "A",
+        "content": "结论句"
+      },
+      {
+        "key": "B",
+        "content": "背景句"
+      },
+      {
+        "key": "C",
+        "content": "举例句"
+      },
+      {
+        "key": "D",
+        "content": "引用句"
+      }
+    ]
+  },
+  {
+    "category": "行测-言语理解",
+    "stem": "“望梅止渴”体现的心理效应更接近：",
+    "answer_key": "B",
+    "analysis": "联想刺激引发相应心理反应。",
+    "difficulty": 2,
+    "tags": "词语",
+    "options": [
+      {
+        "key": "A",
+        "content": "首因效应"
+      },
+      {
+        "key": "B",
+        "content": "心理暗示"
+      },
+      {
+        "key": "C",
+        "content": "从众效应"
+      },
+      {
+        "key": "D",
+        "content": "晕轮效应"
+      }
+    ]
+  },
+  {
+    "category": "行测-言语理解",
+    "stem": "强调数字政府建设成效的文段，最适合的标题是：",
+    "answer_key": "C",
+    "analysis": "标题应概括核心成效。",
+    "difficulty": 1,
+    "tags": "标题选择",
+    "options": [
+      {
+        "key": "A",
+        "content": "基层治理困难多"
+      },
+      {
+        "key": "B",
+        "content": "一次办结仍需努力"
+      },
+      {
+        "key": "C",
+        "content": "数字政府建设显成效"
+      },
+      {
+        "key": "D",
+        "content": "群众意见收集中"
+      }
+    ]
+  },
+  {
+    "category": "行测-数量关系",
+    "stem": "某班有学生50人，男生比女生多10人，女生有多少人？",
+    "answer_key": "B",
+    "analysis": "设女生x，则2x+10=50，x=20。",
+    "difficulty": 1,
+    "tags": "方程",
+    "options": [
+      {
+        "key": "A",
+        "content": "15"
+      },
+      {
+        "key": "B",
+        "content": "20"
+      },
+      {
+        "key": "C",
+        "content": "25"
+      },
+      {
+        "key": "D",
+        "content": "30"
+      }
+    ]
+  },
+  {
+    "category": "行测-数量关系",
+    "stem": "一台打印机原价1200元，打八折后售价是：",
+    "answer_key": "A",
+    "analysis": "1200×0.8=960。",
+    "difficulty": 1,
+    "tags": "百分数",
+    "options": [
+      {
+        "key": "A",
+        "content": "960"
+      },
+      {
+        "key": "B",
+        "content": "1000"
+      },
+      {
+        "key": "C",
+        "content": "1080"
+      },
+      {
+        "key": "D",
+        "content": "1100"
+      }
+    ]
+  },
+  {
+    "category": "行测-数量关系",
+    "stem": "甲乙效率比3:2，合作10天完成，甲单独完成需：",
+    "answer_key": "C",
+    "analysis": "总量=5×10=50份，甲每天3份，50/3天。",
+    "difficulty": 2,
+    "tags": "工程",
+    "options": [
+      {
+        "key": "A",
+        "content": "10天"
+      },
+      {
+        "key": "B",
+        "content": "12天"
+      },
+      {
+        "key": "C",
+        "content": "50/3天"
+      },
+      {
+        "key": "D",
+        "content": "20天"
+      }
+    ]
+  },
+  {
+    "category": "行测-数量关系",
+    "stem": "等差数列2，5，8，11…第10项是：",
+    "answer_key": "D",
+    "analysis": "第n项=2+(n-1)×3，n=10得29。",
+    "difficulty": 1,
+    "tags": "数列",
+    "options": [
+      {
+        "key": "A",
+        "content": "26"
+      },
+      {
+        "key": "B",
+        "content": "27"
+      },
+      {
+        "key": "C",
+        "content": "28"
+      },
+      {
+        "key": "D",
+        "content": "29"
+      }
+    ]
+  },
+  {
+    "category": "行测-数量关系",
+    "stem": "圆形水池半径7米，周长约为（π取22/7）：",
+    "answer_key": "A",
+    "analysis": "2πr=2×22/7×7=44。",
+    "difficulty": 1,
+    "tags": "几何",
+    "options": [
+      {
+        "key": "A",
+        "content": "44"
+      },
+      {
+        "key": "B",
+        "content": "48"
+      },
+      {
+        "key": "C",
+        "content": "50"
+      },
+      {
+        "key": "D",
+        "content": "56"
+      }
+    ]
+  },
+  {
+    "category": "行测-数量关系",
+    "stem": "红白球共30个，红球是白球2倍，红球有：",
+    "answer_key": "C",
+    "analysis": "白x红2x，3x=30，红=20。",
+    "difficulty": 1,
+    "tags": "方程",
+    "options": [
+      {
+        "key": "A",
+        "content": "10"
+      },
+      {
+        "key": "B",
+        "content": "15"
+      },
+      {
+        "key": "C",
+        "content": "20"
+      },
+      {
+        "key": "D",
+        "content": "25"
+      }
+    ]
+  },
+  {
+    "category": "行测-数量关系",
+    "stem": "火车时速72km/h，通过900米桥（忽略车长）用时：",
+    "answer_key": "B",
+    "analysis": "72km/h=20m/s，900/20=45秒。",
+    "difficulty": 1,
+    "tags": "行程",
+    "options": [
+      {
+        "key": "A",
+        "content": "30秒"
+      },
+      {
+        "key": "B",
+        "content": "45秒"
+      },
+      {
+        "key": "C",
+        "content": "60秒"
+      },
+      {
+        "key": "D",
+        "content": "90秒"
+      }
+    ]
+  },
+  {
+    "category": "行测-数量关系",
+    "stem": "商品进价80元，加价50%后打八折，利润是：",
+    "answer_key": "A",
+    "analysis": "标价120，售价96，利润16。",
+    "difficulty": 1,
+    "tags": "利润",
+    "options": [
+      {
+        "key": "A",
+        "content": "16元"
+      },
+      {
+        "key": "B",
+        "content": "20元"
+      },
+      {
+        "key": "C",
+        "content": "24元"
+      },
+      {
+        "key": "D",
+        "content": "30元"
+      }
+    ]
+  },
+  {
+    "category": "行测-数量关系",
+    "stem": "1到100中能被3整除的数有多少个？",
+    "answer_key": "C",
+    "analysis": "3到99共33个。",
+    "difficulty": 1,
+    "tags": "计数",
+    "options": [
+      {
+        "key": "A",
+        "content": "30"
+      },
+      {
+        "key": "B",
+        "content": "32"
+      },
+      {
+        "key": "C",
+        "content": "33"
+      },
+      {
+        "key": "D",
+        "content": "34"
+      }
+    ]
+  },
+  {
+    "category": "行测-数量关系",
+    "stem": "甲乙相向，甲速40乙速60，3小时相遇，距离：",
+    "answer_key": "D",
+    "analysis": "相对速度100，距离300。",
+    "difficulty": 1,
+    "tags": "行程",
+    "options": [
+      {
+        "key": "A",
+        "content": "180"
+      },
+      {
+        "key": "B",
+        "content": "200"
+      },
+      {
+        "key": "C",
+        "content": "240"
+      },
+      {
+        "key": "D",
+        "content": "300"
+      }
+    ]
+  },
+  {
+    "category": "行测-数量关系",
+    "stem": "一个数的3/4是24，这个数是：",
+    "answer_key": "B",
+    "analysis": "(3/4)x=24，x=32。",
+    "difficulty": 1,
+    "tags": "分数",
+    "options": [
+      {
+        "key": "A",
+        "content": "28"
+      },
+      {
+        "key": "B",
+        "content": "32"
+      },
+      {
+        "key": "C",
+        "content": "36"
+      },
+      {
+        "key": "D",
+        "content": "48"
+      }
+    ]
+  },
+  {
+    "category": "行测-数量关系",
+    "stem": "用1、2、3组成不重复三位数，共有：",
+    "answer_key": "A",
+    "analysis": "3×2×1=6。",
+    "difficulty": 1,
+    "tags": "排列",
+    "options": [
+      {
+        "key": "A",
+        "content": "6"
+      },
+      {
+        "key": "B",
+        "content": "9"
+      },
+      {
+        "key": "C",
+        "content": "12"
+      },
+      {
+        "key": "D",
+        "content": "27"
+      }
+    ]
+  },
+  {
+    "category": "行测-判断推理",
+    "stem": "“所有公务员都要遵守纪律。小王是公务员。所以小王要遵守纪律。”属于：",
+    "answer_key": "A",
+    "analysis": "三段论推理。",
+    "difficulty": 1,
+    "tags": "逻辑",
+    "options": [
+      {
+        "key": "A",
+        "content": "三段论"
+      },
+      {
+        "key": "B",
+        "content": "类比推理"
+      },
+      {
+        "key": "C",
+        "content": "归纳推理"
+      },
+      {
+        "key": "D",
+        "content": "选言推理"
+      }
+    ]
+  },
+  {
+    "category": "行测-判断推理",
+    "stem": "“只有通过体检，才能被录用”等价于：",
+    "answer_key": "C",
+    "analysis": "录用则通过体检（必要条件）。",
+    "difficulty": 2,
+    "tags": "复言命题",
+    "options": [
+      {
+        "key": "A",
+        "content": "体检就能录用"
+      },
+      {
+        "key": "B",
+        "content": "不录用则没体检"
+      },
+      {
+        "key": "C",
+        "content": "录用则通过体检"
+      },
+      {
+        "key": "D",
+        "content": "体检且录用"
+      }
+    ]
+  },
+  {
+    "category": "行测-判断推理",
+    "stem": "类比：钢笔∶书写 类似于：",
+    "answer_key": "B",
+    "analysis": "工具与功能。",
+    "difficulty": 1,
+    "tags": "类比",
+    "options": [
+      {
+        "key": "A",
+        "content": "书本∶知识"
+      },
+      {
+        "key": "B",
+        "content": "镰刀∶收割"
+      },
+      {
+        "key": "C",
+        "content": "衣服∶布料"
+      },
+      {
+        "key": "D",
+        "content": "道路∶汽车"
+      }
+    ]
+  },
+  {
+    "category": "行测-判断推理",
+    "stem": "机会成本指放弃次优选择的收益。属于机会成本的是：",
+    "answer_key": "A",
+    "analysis": "读研放弃的工作薪资。",
+    "difficulty": 2,
+    "tags": "定义判断",
+    "options": [
+      {
+        "key": "A",
+        "content": "读研放弃的工作薪资"
+      },
+      {
+        "key": "B",
+        "content": "已支付的学费"
+      },
+      {
+        "key": "C",
+        "content": "沉没的广告费"
+      },
+      {
+        "key": "D",
+        "content": "固定资产折旧"
+      }
+    ]
+  },
+  {
+    "category": "行测-判断推理",
+    "stem": "研究称喝咖啡提高效率。最能削弱的是：",
+    "answer_key": "D",
+    "analysis": "因果倒置：效率高者更爱喝咖啡。",
+    "difficulty": 2,
+    "tags": "削弱",
+    "options": [
+      {
+        "key": "A",
+        "content": "很多人爱喝咖啡"
+      },
+      {
+        "key": "B",
+        "content": "咖啡含咖啡因"
+      },
+      {
+        "key": "C",
+        "content": "样本来自办公室"
+      },
+      {
+        "key": "D",
+        "content": "效率高者本来更爱喝咖啡"
+      }
+    ]
+  },
+  {
+    "category": "行测-判断推理",
+    "stem": "多锻炼的人更健康。最能加强的是：",
+    "answer_key": "B",
+    "analysis": "控制混淆变量后仍成立。",
+    "difficulty": 2,
+    "tags": "加强",
+    "options": [
+      {
+        "key": "A",
+        "content": "健康的人更多"
+      },
+      {
+        "key": "B",
+        "content": "排除遗传等因素后仍成立"
+      },
+      {
+        "key": "C",
+        "content": "锻炼很流行"
+      },
+      {
+        "key": "D",
+        "content": "医院建议锻炼"
+      }
+    ]
+  },
+  {
+    "category": "行测-判断推理",
+    "stem": "“有些考生通过了面试”为真，则一定为真：",
+    "answer_key": "A",
+    "analysis": "并非所有考生都没通过面试。",
+    "difficulty": 2,
+    "tags": "直言命题",
+    "options": [
+      {
+        "key": "A",
+        "content": "并非所有考生都没通过面试"
+      },
+      {
+        "key": "B",
+        "content": "所有考生都通过面试"
+      },
+      {
+        "key": "C",
+        "content": "小张通过了面试"
+      },
+      {
+        "key": "D",
+        "content": "多数考生通过面试"
+      }
+    ]
+  },
+  {
+    "category": "行测-判断推理",
+    "stem": "前提“凡金属都导电，铜是金属”，可推出：",
+    "answer_key": "A",
+    "analysis": "三段论推出铜导电。",
+    "difficulty": 1,
+    "tags": "三段论",
+    "options": [
+      {
+        "key": "A",
+        "content": "铜导电"
+      },
+      {
+        "key": "B",
+        "content": "铜不导电"
+      },
+      {
+        "key": "C",
+        "content": "有些金属不导电"
+      },
+      {
+        "key": "D",
+        "content": "所有导体都是金属"
+      }
+    ]
+  },
+  {
+    "category": "行测-判断推理",
+    "stem": "“如果下雨，则地湿。地湿了。”能否推出下雨？",
+    "answer_key": "B",
+    "analysis": "肯定后件不能推出前件。",
+    "difficulty": 1,
+    "tags": "假言",
+    "options": [
+      {
+        "key": "A",
+        "content": "能"
+      },
+      {
+        "key": "B",
+        "content": "不能"
+      },
+      {
+        "key": "C",
+        "content": "一定下雨"
+      },
+      {
+        "key": "D",
+        "content": "与下雨无关"
+      }
+    ]
+  },
+  {
+    "category": "行测-判断推理",
+    "stem": "排序：①报名②缴费③打印准考证④参加考试。正确顺序：",
+    "answer_key": "A",
+    "analysis": "报名→缴费→打印→考试。",
+    "difficulty": 1,
+    "tags": "事件排序",
+    "options": [
+      {
+        "key": "A",
+        "content": "①②③④"
+      },
+      {
+        "key": "B",
+        "content": "①③②④"
+      },
+      {
+        "key": "C",
+        "content": "②①③④"
+      },
+      {
+        "key": "D",
+        "content": "①②④③"
+      }
+    ]
+  },
+  {
+    "category": "行测-判断推理",
+    "stem": "“多数”“有些”“所有”中量最大的是：",
+    "answer_key": "C",
+    "analysis": "全称量词“所有”。",
+    "difficulty": 1,
+    "tags": "直言命题",
+    "options": [
+      {
+        "key": "A",
+        "content": "多数"
+      },
+      {
+        "key": "B",
+        "content": "有些"
+      },
+      {
+        "key": "C",
+        "content": "所有"
+      },
+      {
+        "key": "D",
+        "content": "个别"
+      }
+    ]
+  },
+  {
+    "category": "行测-判断推理",
+    "stem": "若“所有A都是B，所有B都是C”，可推出：",
+    "answer_key": "A",
+    "analysis": "所有A都是C。",
+    "difficulty": 2,
+    "tags": "三段论",
+    "options": [
+      {
+        "key": "A",
+        "content": "所有A都是C"
+      },
+      {
+        "key": "B",
+        "content": "所有C都是A"
+      },
+      {
+        "key": "C",
+        "content": "有些C不是A"
+      },
+      {
+        "key": "D",
+        "content": "A与C无关"
+      }
+    ]
+  },
+  {
+    "category": "行测-资料分析",
+    "stem": "去年GDP为5000亿，今年增长8%，今年GDP约为：",
+    "answer_key": "B",
+    "analysis": "5000×1.08=5400。",
+    "difficulty": 1,
+    "tags": "增长率",
+    "options": [
+      {
+        "key": "A",
+        "content": "5200亿"
+      },
+      {
+        "key": "B",
+        "content": "5400亿"
+      },
+      {
+        "key": "C",
+        "content": "5600亿"
+      },
+      {
+        "key": "D",
+        "content": "5800亿"
+      }
+    ]
+  },
+  {
+    "category": "行测-资料分析",
+    "stem": "现期200，增长25%，基期是：",
+    "answer_key": "A",
+    "analysis": "200/1.25=160。",
+    "difficulty": 1,
+    "tags": "基期量",
+    "options": [
+      {
+        "key": "A",
+        "content": "160"
+      },
+      {
+        "key": "B",
+        "content": "150"
+      },
+      {
+        "key": "C",
+        "content": "175"
+      },
+      {
+        "key": "D",
+        "content": "180"
+      }
+    ]
+  },
+  {
+    "category": "行测-资料分析",
+    "stem": "现期330，增长率10%，增长量：",
+    "answer_key": "C",
+    "analysis": "330×0.1/1.1=30。",
+    "difficulty": 1,
+    "tags": "增长量",
+    "options": [
+      {
+        "key": "A",
+        "content": "33"
+      },
+      {
+        "key": "B",
+        "content": "31"
+      },
+      {
+        "key": "C",
+        "content": "30"
+      },
+      {
+        "key": "D",
+        "content": "27"
+      }
+    ]
+  },
+  {
+    "category": "行测-资料分析",
+    "stem": "部分45，整体150，比重：",
+    "answer_key": "B",
+    "analysis": "45/150=30%。",
+    "difficulty": 1,
+    "tags": "比重",
+    "options": [
+      {
+        "key": "A",
+        "content": "25%"
+      },
+      {
+        "key": "B",
+        "content": "30%"
+      },
+      {
+        "key": "C",
+        "content": "35%"
+      },
+      {
+        "key": "D",
+        "content": "40%"
+      }
+    ]
+  },
+  {
+    "category": "行测-资料分析",
+    "stem": "两年分别增长10%、20%，隔年增长率约：",
+    "answer_key": "C",
+    "analysis": "0.1+0.2+0.02=32%。",
+    "difficulty": 1,
+    "tags": "隔年增长",
+    "options": [
+      {
+        "key": "A",
+        "content": "30%"
+      },
+      {
+        "key": "B",
+        "content": "31%"
+      },
+      {
+        "key": "C",
+        "content": "32%"
+      },
+      {
+        "key": "D",
+        "content": "35%"
+      }
+    ]
+  },
+  {
+    "category": "行测-资料分析",
+    "stem": "部分增长量20，整体基期400，拉动增长：",
+    "answer_key": "A",
+    "analysis": "20/400=5个百分点。",
+    "difficulty": 1,
+    "tags": "拉动增长",
+    "options": [
+      {
+        "key": "A",
+        "content": "5个百分点"
+      },
+      {
+        "key": "B",
+        "content": "8个百分点"
+      },
+      {
+        "key": "C",
+        "content": "10个百分点"
+      },
+      {
+        "key": "D",
+        "content": "20个百分点"
+      }
+    ]
+  },
+  {
+    "category": "行测-资料分析",
+    "stem": "出口800进口650，顺差：",
+    "answer_key": "D",
+    "analysis": "800-650=150。",
+    "difficulty": 1,
+    "tags": "贸易",
+    "options": [
+      {
+        "key": "A",
+        "content": "50"
+      },
+      {
+        "key": "B",
+        "content": "100"
+      },
+      {
+        "key": "C",
+        "content": "120"
+      },
+      {
+        "key": "D",
+        "content": "150"
+      }
+    ]
+  },
+  {
+    "category": "行测-资料分析",
+    "stem": "现期量比基期量多1/4，则增长率是：",
+    "answer_key": "B",
+    "analysis": "多1/4即增长25%。",
+    "difficulty": 1,
+    "tags": "增长率",
+    "options": [
+      {
+        "key": "A",
+        "content": "20%"
+      },
+      {
+        "key": "B",
+        "content": "25%"
+      },
+      {
+        "key": "C",
+        "content": "30%"
+      },
+      {
+        "key": "D",
+        "content": "40%"
+      }
+    ]
+  },
+  {
+    "category": "公基-政治理论",
+    "stem": "我国的根本政治制度是：",
+    "answer_key": "A",
+    "analysis": "人民代表大会制度是根本政治制度。",
+    "difficulty": 1,
+    "tags": "制度",
+    "options": [
+      {
+        "key": "A",
+        "content": "人民代表大会制度"
+      },
+      {
+        "key": "B",
+        "content": "多党合作和政治协商制度"
+      },
+      {
+        "key": "C",
+        "content": "民族区域自治制度"
+      },
+      {
+        "key": "D",
+        "content": "基层群众自治制度"
+      }
+    ]
+  },
+  {
+    "category": "公基-政治理论",
+    "stem": "中华人民共和国的一切权力属于：",
+    "answer_key": "B",
+    "analysis": "宪法规定一切权力属于人民。",
+    "difficulty": 1,
+    "tags": "宪法",
+    "options": [
+      {
+        "key": "A",
+        "content": "政府"
+      },
+      {
+        "key": "B",
+        "content": "人民"
+      },
+      {
+        "key": "C",
+        "content": "人大常委会"
+      },
+      {
+        "key": "D",
+        "content": "国务院"
+      }
+    ]
+  },
+  {
+    "category": "公基-政治理论",
+    "stem": "党的根本宗旨是：",
+    "answer_key": "C",
+    "analysis": "全心全意为人民服务。",
+    "difficulty": 1,
+    "tags": "党建",
+    "options": [
+      {
+        "key": "A",
+        "content": "实事求是"
+      },
+      {
+        "key": "B",
+        "content": "与时俱进"
+      },
+      {
+        "key": "C",
+        "content": "全心全意为人民服务"
+      },
+      {
+        "key": "D",
+        "content": "依法治国"
+      }
+    ]
+  },
+  {
+    "category": "公基-政治理论",
+    "stem": "“四个自信”不包括：",
+    "answer_key": "D",
+    "analysis": "道路、理论、制度、文化自信。",
+    "difficulty": 1,
+    "tags": "新时代",
+    "options": [
+      {
+        "key": "A",
+        "content": "道路自信"
+      },
+      {
+        "key": "B",
+        "content": "理论自信"
+      },
+      {
+        "key": "C",
+        "content": "制度自信"
+      },
+      {
+        "key": "D",
+        "content": "军事自信"
+      }
+    ]
+  },
+  {
+    "category": "公基-政治理论",
+    "stem": "我国国家机构实行的原则是：",
+    "answer_key": "A",
+    "analysis": "民主集中制。",
+    "difficulty": 1,
+    "tags": "国体政体",
+    "options": [
+      {
+        "key": "A",
+        "content": "民主集中制"
+      },
+      {
+        "key": "B",
+        "content": "三权分立"
+      },
+      {
+        "key": "C",
+        "content": "议会主权"
+      },
+      {
+        "key": "D",
+        "content": "联邦制"
+      }
+    ]
+  },
+  {
+    "category": "公基-政治理论",
+    "stem": "中国特色社会主义最本质的特征是：",
+    "answer_key": "B",
+    "analysis": "中国共产党领导。",
+    "difficulty": 1,
+    "tags": "新时代",
+    "options": [
+      {
+        "key": "A",
+        "content": "改革开放"
+      },
+      {
+        "key": "B",
+        "content": "中国共产党领导"
+      },
+      {
+        "key": "C",
+        "content": "市场经济"
+      },
+      {
+        "key": "D",
+        "content": "共同富裕"
+      }
+    ]
+  },
+  {
+    "category": "公基-政治理论",
+    "stem": "社会主义核心价值观个人层面是：",
+    "answer_key": "C",
+    "analysis": "爱国、敬业、诚信、友善。",
+    "difficulty": 1,
+    "tags": "价值观",
+    "options": [
+      {
+        "key": "A",
+        "content": "富强民主"
+      },
+      {
+        "key": "B",
+        "content": "自由平等"
+      },
+      {
+        "key": "C",
+        "content": "爱国敬业诚信友善"
+      },
+      {
+        "key": "D",
+        "content": "和谐文明"
+      }
+    ]
+  },
+  {
+    "category": "公基-政治理论",
+    "stem": "全面依法治国的总抓手是：",
+    "answer_key": "A",
+    "analysis": "建设中国特色社会主义法治体系。",
+    "difficulty": 1,
+    "tags": "法治",
+    "options": [
+      {
+        "key": "A",
+        "content": "建设中国特色社会主义法治体系"
+      },
+      {
+        "key": "B",
+        "content": "司法改革"
+      },
+      {
+        "key": "C",
+        "content": "普法宣传"
+      },
+      {
+        "key": "D",
+        "content": "加强执法"
+      }
+    ]
+  },
+  {
+    "category": "公基-政治理论",
+    "stem": "新发展理念的内容是：",
+    "answer_key": "B",
+    "analysis": "创新、协调、绿色、开放、共享。",
+    "difficulty": 1,
+    "tags": "发展理念",
+    "options": [
+      {
+        "key": "A",
+        "content": "高速高质"
+      },
+      {
+        "key": "B",
+        "content": "创新协调绿色开放共享"
+      },
+      {
+        "key": "C",
+        "content": "沿海沿边"
+      },
+      {
+        "key": "D",
+        "content": "东中西部"
+      }
+    ]
+  },
+  {
+    "category": "公基-政治理论",
+    "stem": "人民军队的宗旨是：",
+    "answer_key": "C",
+    "analysis": "全心全意为人民服务。",
+    "difficulty": 1,
+    "tags": "国防",
+    "options": [
+      {
+        "key": "A",
+        "content": "保卫边疆"
+      },
+      {
+        "key": "B",
+        "content": "维护和平"
+      },
+      {
+        "key": "C",
+        "content": "全心全意为人民服务"
+      },
+      {
+        "key": "D",
+        "content": "科技强军"
+      }
+    ]
+  },
+  {
+    "category": "公基-政治理论",
+    "stem": "社会主义初级阶段基本路线的核心是：",
+    "answer_key": "A",
+    "analysis": "以经济建设为中心。",
+    "difficulty": 1,
+    "tags": "基本路线",
+    "options": [
+      {
+        "key": "A",
+        "content": "以经济建设为中心"
+      },
+      {
+        "key": "B",
+        "content": "坚持四项基本原则"
+      },
+      {
+        "key": "C",
+        "content": "坚持改革开放"
+      },
+      {
+        "key": "D",
+        "content": "自力更生"
+      }
+    ]
+  },
+  {
+    "category": "公基-政治理论",
+    "stem": "“五位一体”总体布局不包括：",
+    "answer_key": "D",
+    "analysis": "经济政治文化社会生态文明。",
+    "difficulty": 1,
+    "tags": "总体布局",
+    "options": [
+      {
+        "key": "A",
+        "content": "经济建设"
+      },
+      {
+        "key": "B",
+        "content": "政治建设"
+      },
+      {
+        "key": "C",
+        "content": "文化建设"
+      },
+      {
+        "key": "D",
+        "content": "军事建设"
+      }
+    ]
+  },
+  {
+    "category": "公基-法律基础",
+    "stem": "我国现行宪法是：",
+    "answer_key": "B",
+    "analysis": "1982年宪法是现行宪法。",
+    "difficulty": 1,
+    "tags": "宪法",
+    "options": [
+      {
+        "key": "A",
+        "content": "1954年宪法"
+      },
+      {
+        "key": "B",
+        "content": "1982年宪法"
+      },
+      {
+        "key": "C",
+        "content": "1978年宪法"
+      },
+      {
+        "key": "D",
+        "content": "1975年宪法"
+      }
+    ]
+  },
+  {
+    "category": "公基-法律基础",
+    "stem": "享有其他权利前提意义较强的基本权利是：",
+    "answer_key": "A",
+    "analysis": "人身自由。",
+    "difficulty": 1,
+    "tags": "权利",
+    "options": [
+      {
+        "key": "A",
+        "content": "人身自由"
+      },
+      {
+        "key": "B",
+        "content": "受教育权"
+      },
+      {
+        "key": "C",
+        "content": "休息权"
+      },
+      {
+        "key": "D",
+        "content": "文化权"
+      }
+    ]
+  },
+  {
+    "category": "公基-法律基础",
+    "stem": "完全民事行为能力人一般年龄要求：",
+    "answer_key": "C",
+    "analysis": "十八周岁以上。",
+    "difficulty": 1,
+    "tags": "民法",
+    "options": [
+      {
+        "key": "A",
+        "content": "十四周岁"
+      },
+      {
+        "key": "B",
+        "content": "十六周岁"
+      },
+      {
+        "key": "C",
+        "content": "十八周岁"
+      },
+      {
+        "key": "D",
+        "content": "二十周岁"
+      }
+    ]
+  },
+  {
+    "category": "公基-法律基础",
+    "stem": "已满十六周岁的人犯罪：",
+    "answer_key": "A",
+    "analysis": "应当负刑事责任。",
+    "difficulty": 1,
+    "tags": "刑法",
+    "options": [
+      {
+        "key": "A",
+        "content": "应当负刑事责任"
+      },
+      {
+        "key": "B",
+        "content": "一概不负"
+      },
+      {
+        "key": "C",
+        "content": "可以从轻"
+      },
+      {
+        "key": "D",
+        "content": "只负民事责任"
+      }
+    ]
+  },
+  {
+    "category": "公基-法律基础",
+    "stem": "行政诉讼的被告通常是：",
+    "answer_key": "B",
+    "analysis": "作出行政行为的行政机关。",
+    "difficulty": 1,
+    "tags": "行政法",
+    "options": [
+      {
+        "key": "A",
+        "content": "法院"
+      },
+      {
+        "key": "B",
+        "content": "行政机关"
+      },
+      {
+        "key": "C",
+        "content": "检察院"
+      },
+      {
+        "key": "D",
+        "content": "人大"
+      }
+    ]
+  },
+  {
+    "category": "公基-法律基础",
+    "stem": "劳动合同试用期最长不得超过：",
+    "answer_key": "C",
+    "analysis": "六个月。",
+    "difficulty": 1,
+    "tags": "劳动法",
+    "options": [
+      {
+        "key": "A",
+        "content": "一个月"
+      },
+      {
+        "key": "B",
+        "content": "三个月"
+      },
+      {
+        "key": "C",
+        "content": "六个月"
+      },
+      {
+        "key": "D",
+        "content": "一年"
+      }
+    ]
+  },
+  {
+    "category": "公基-法律基础",
+    "stem": "法的效力层次中最高的是：",
+    "answer_key": "A",
+    "analysis": "宪法具有最高法律效力。",
+    "difficulty": 1,
+    "tags": "法理",
+    "options": [
+      {
+        "key": "A",
+        "content": "宪法"
+      },
+      {
+        "key": "B",
+        "content": "法律"
+      },
+      {
+        "key": "C",
+        "content": "行政法规"
+      },
+      {
+        "key": "D",
+        "content": "地方性法规"
+      }
+    ]
+  },
+  {
+    "category": "公基-法律基础",
+    "stem": "行政处罚中的警告属于：",
+    "answer_key": "B",
+    "analysis": "申诫罚。",
+    "difficulty": 1,
+    "tags": "行政法",
+    "options": [
+      {
+        "key": "A",
+        "content": "人身罚"
+      },
+      {
+        "key": "B",
+        "content": "申诫罚"
+      },
+      {
+        "key": "C",
+        "content": "财产罚"
+      },
+      {
+        "key": "D",
+        "content": "行为罚"
+      }
+    ]
+  },
+  {
+    "category": "公基-法律基础",
+    "stem": "犯罪构成四要件不包括：",
+    "answer_key": "D",
+    "analysis": "主体主观客体客观。",
+    "difficulty": 1,
+    "tags": "刑法",
+    "options": [
+      {
+        "key": "A",
+        "content": "犯罪主体"
+      },
+      {
+        "key": "B",
+        "content": "主观方面"
+      },
+      {
+        "key": "C",
+        "content": "客观方面"
+      },
+      {
+        "key": "D",
+        "content": "社会舆论"
+      }
+    ]
+  },
+  {
+    "category": "公基-法律基础",
+    "stem": "民事诉讼一审普通程序审限一般是：",
+    "answer_key": "A",
+    "analysis": "六个月。",
+    "difficulty": 1,
+    "tags": "民诉",
+    "options": [
+      {
+        "key": "A",
+        "content": "六个月"
+      },
+      {
+        "key": "B",
+        "content": "三个月"
+      },
+      {
+        "key": "C",
+        "content": "九个月"
+      },
+      {
+        "key": "D",
+        "content": "一年"
+      }
+    ]
+  },
+  {
+    "category": "公基-法律基础",
+    "stem": "行政许可原则不包括：",
+    "answer_key": "D",
+    "analysis": "公开公平公正便民。",
+    "difficulty": 1,
+    "tags": "行政法",
+    "options": [
+      {
+        "key": "A",
+        "content": "公开"
+      },
+      {
+        "key": "B",
+        "content": "公平"
+      },
+      {
+        "key": "C",
+        "content": "便民"
+      },
+      {
+        "key": "D",
+        "content": "秘密审查"
+      }
+    ]
+  },
+  {
+    "category": "公基-法律基础",
+    "stem": "国家赔偿主要归责原则是：",
+    "answer_key": "B",
+    "analysis": "违法归责为主。",
+    "difficulty": 2,
+    "tags": "国家赔偿",
+    "options": [
+      {
+        "key": "A",
+        "content": "过错推定唯一"
+      },
+      {
+        "key": "B",
+        "content": "违法归责"
+      },
+      {
+        "key": "C",
+        "content": "无过错绝对"
+      },
+      {
+        "key": "D",
+        "content": "结果责任唯一"
+      }
+    ]
+  },
+  {
+    "category": "公基-人文常识",
+    "stem": "《论语》主要记录的是：",
+    "answer_key": "A",
+    "analysis": "孔子及其弟子言行。",
+    "difficulty": 1,
+    "tags": "文化",
+    "options": [
+      {
+        "key": "A",
+        "content": "孔子及其弟子言行"
+      },
+      {
+        "key": "B",
+        "content": "孟子思想"
+      },
+      {
+        "key": "C",
+        "content": "老子学说"
+      },
+      {
+        "key": "D",
+        "content": "庄子寓言"
+      }
+    ]
+  },
+  {
+    "category": "公基-人文常识",
+    "stem": "“文房四宝”指：",
+    "answer_key": "B",
+    "analysis": "笔墨纸砚。",
+    "difficulty": 1,
+    "tags": "文化",
+    "options": [
+      {
+        "key": "A",
+        "content": "琴棋书画"
+      },
+      {
+        "key": "B",
+        "content": "笔墨纸砚"
+      },
+      {
+        "key": "C",
+        "content": "梅兰竹菊"
+      },
+      {
+        "key": "D",
+        "content": "风花雪月"
+      }
+    ]
+  },
+  {
+    "category": "公基-人文常识",
+    "stem": "丝绸之路起点通常认为是：",
+    "answer_key": "C",
+    "analysis": "长安。",
+    "difficulty": 1,
+    "tags": "历史",
+    "options": [
+      {
+        "key": "A",
+        "content": "洛阳"
+      },
+      {
+        "key": "B",
+        "content": "敦煌"
+      },
+      {
+        "key": "C",
+        "content": "长安"
+      },
+      {
+        "key": "D",
+        "content": "成都"
+      }
+    ]
+  },
+  {
+    "category": "公基-人文常识",
+    "stem": "五四运动爆发于：",
+    "answer_key": "A",
+    "analysis": "1919年。",
+    "difficulty": 1,
+    "tags": "近代史",
+    "options": [
+      {
+        "key": "A",
+        "content": "1919年"
+      },
+      {
+        "key": "B",
+        "content": "1921年"
+      },
+      {
+        "key": "C",
+        "content": "1911年"
+      },
+      {
+        "key": "D",
+        "content": "1949年"
+      }
+    ]
+  },
+  {
+    "category": "公基-人文常识",
+    "stem": "中国第一部诗歌总集是：",
+    "answer_key": "B",
+    "analysis": "《诗经》。",
+    "difficulty": 1,
+    "tags": "文学",
+    "options": [
+      {
+        "key": "A",
+        "content": "楚辞"
+      },
+      {
+        "key": "B",
+        "content": "诗经"
+      },
+      {
+        "key": "C",
+        "content": "乐府"
+      },
+      {
+        "key": "D",
+        "content": "唐诗三百首"
+      }
+    ]
+  },
+  {
+    "category": "公基-人文常识",
+    "stem": "“三省六部制”完善于：",
+    "answer_key": "C",
+    "analysis": "隋唐。",
+    "difficulty": 1,
+    "tags": "制度史",
+    "options": [
+      {
+        "key": "A",
+        "content": "秦汉"
+      },
+      {
+        "key": "B",
+        "content": "魏晋"
+      },
+      {
+        "key": "C",
+        "content": "隋唐"
+      },
+      {
+        "key": "D",
+        "content": "宋元"
+      }
+    ]
+  },
+  {
+    "category": "公基-人文常识",
+    "stem": "京剧中活泼女性角色行当常称：",
+    "answer_key": "A",
+    "analysis": "花旦。",
+    "difficulty": 1,
+    "tags": "戏曲",
+    "options": [
+      {
+        "key": "A",
+        "content": "花旦"
+      },
+      {
+        "key": "B",
+        "content": "老生"
+      },
+      {
+        "key": "C",
+        "content": "净"
+      },
+      {
+        "key": "D",
+        "content": "丑"
+      }
+    ]
+  },
+  {
+    "category": "公基-人文常识",
+    "stem": "《资治通鉴》体裁是：",
+    "answer_key": "B",
+    "analysis": "编年体。",
+    "difficulty": 1,
+    "tags": "史学",
+    "options": [
+      {
+        "key": "A",
+        "content": "纪传体"
+      },
+      {
+        "key": "B",
+        "content": "编年体"
+      },
+      {
+        "key": "C",
+        "content": "国别体"
+      },
+      {
+        "key": "D",
+        "content": "纪事本末体"
+      }
+    ]
+  },
+  {
+    "category": "公基-人文常识",
+    "stem": "“开元盛世”出现在：",
+    "answer_key": "C",
+    "analysis": "唐玄宗时期。",
+    "difficulty": 1,
+    "tags": "历史",
+    "options": [
+      {
+        "key": "A",
+        "content": "唐太宗"
+      },
+      {
+        "key": "B",
+        "content": "唐高宗"
+      },
+      {
+        "key": "C",
+        "content": "唐玄宗"
+      },
+      {
+        "key": "D",
+        "content": "唐中宗"
+      }
+    ]
+  },
+  {
+    "category": "公基-人文常识",
+    "stem": "中国古代四大发明不包括：",
+    "answer_key": "D",
+    "analysis": "地动仪不是四大发明。",
+    "difficulty": 1,
+    "tags": "科技史",
+    "options": [
+      {
+        "key": "A",
+        "content": "造纸术"
+      },
+      {
+        "key": "B",
+        "content": "指南针"
+      },
+      {
+        "key": "C",
+        "content": "火药"
+      },
+      {
+        "key": "D",
+        "content": "地动仪"
+      }
+    ]
+  },
+  {
+    "category": "公基-科技自然",
+    "stem": "光在真空中的速度约为：",
+    "answer_key": "A",
+    "analysis": "3×10^8米/秒。",
+    "difficulty": 1,
+    "tags": "物理",
+    "options": [
+      {
+        "key": "A",
+        "content": "3×10^8米/秒"
+      },
+      {
+        "key": "B",
+        "content": "3×10^6米/秒"
+      },
+      {
+        "key": "C",
+        "content": "3×10^5千米/时"
+      },
+      {
+        "key": "D",
+        "content": "光速任意"
+      }
+    ]
+  },
+  {
+    "category": "公基-科技自然",
+    "stem": "人体最大的器官是：",
+    "answer_key": "B",
+    "analysis": "皮肤。",
+    "difficulty": 1,
+    "tags": "生物",
+    "options": [
+      {
+        "key": "A",
+        "content": "肝"
+      },
+      {
+        "key": "B",
+        "content": "皮肤"
+      },
+      {
+        "key": "C",
+        "content": "肺"
+      },
+      {
+        "key": "D",
+        "content": "肠"
+      }
+    ]
+  },
+  {
+    "category": "公基-科技自然",
+    "stem": "PM2.5指的是：",
+    "answer_key": "C",
+    "analysis": "细颗粒物。",
+    "difficulty": 1,
+    "tags": "环境",
+    "options": [
+      {
+        "key": "A",
+        "content": "噪音指标"
+      },
+      {
+        "key": "B",
+        "content": "水质指标"
+      },
+      {
+        "key": "C",
+        "content": "细颗粒物"
+      },
+      {
+        "key": "D",
+        "content": "辐射剂量"
+      }
+    ]
+  },
+  {
+    "category": "公基-科技自然",
+    "stem": "1字节等于：",
+    "answer_key": "A",
+    "analysis": "8比特。",
+    "difficulty": 1,
+    "tags": "计算机",
+    "options": [
+      {
+        "key": "A",
+        "content": "8比特"
+      },
+      {
+        "key": "B",
+        "content": "16比特"
+      },
+      {
+        "key": "C",
+        "content": "32比特"
+      },
+      {
+        "key": "D",
+        "content": "1024比特"
+      }
+    ]
+  },
+  {
+    "category": "公基-科技自然",
+    "stem": "地球公转一周大约：",
+    "answer_key": "B",
+    "analysis": "365天。",
+    "difficulty": 1,
+    "tags": "地理",
+    "options": [
+      {
+        "key": "A",
+        "content": "30天"
+      },
+      {
+        "key": "B",
+        "content": "365天"
+      },
+      {
+        "key": "C",
+        "content": "24小时"
+      },
+      {
+        "key": "D",
+        "content": "严格12个月"
+      }
+    ]
+  },
+  {
+    "category": "公基-科技自然",
+    "stem": "酸雨主要与哪类排放相关？",
+    "answer_key": "C",
+    "analysis": "硫氧化物、氮氧化物等。",
+    "difficulty": 1,
+    "tags": "环境",
+    "options": [
+      {
+        "key": "A",
+        "content": "氧气"
+      },
+      {
+        "key": "B",
+        "content": "氮气"
+      },
+      {
+        "key": "C",
+        "content": "硫氧化物等"
+      },
+      {
+        "key": "D",
+        "content": "稀有气体"
+      }
+    ]
+  },
+  {
+    "category": "公基-科技自然",
+    "stem": "属于可再生能源的是：",
+    "answer_key": "A",
+    "analysis": "太阳能。",
+    "difficulty": 1,
+    "tags": "能源",
+    "options": [
+      {
+        "key": "A",
+        "content": "太阳能"
+      },
+      {
+        "key": "B",
+        "content": "石油"
+      },
+      {
+        "key": "C",
+        "content": "天然气"
+      },
+      {
+        "key": "D",
+        "content": "煤炭"
+      }
+    ]
+  },
+  {
+    "category": "公基-科技自然",
+    "stem": "DNA的全称是：",
+    "answer_key": "B",
+    "analysis": "脱氧核糖核酸。",
+    "difficulty": 1,
+    "tags": "生物",
+    "options": [
+      {
+        "key": "A",
+        "content": "核糖核酸"
+      },
+      {
+        "key": "B",
+        "content": "脱氧核糖核酸"
+      },
+      {
+        "key": "C",
+        "content": "蛋白质"
+      },
+      {
+        "key": "D",
+        "content": "氨基酸"
+      }
+    ]
+  },
+  {
+    "category": "公基-科技自然",
+    "stem": "雾和云的主要区别在于：",
+    "answer_key": "C",
+    "analysis": "离地面高度不同。",
+    "difficulty": 1,
+    "tags": "地理",
+    "options": [
+      {
+        "key": "A",
+        "content": "颜色"
+      },
+      {
+        "key": "B",
+        "content": "温度"
+      },
+      {
+        "key": "C",
+        "content": "离地高度"
+      },
+      {
+        "key": "D",
+        "content": "含水量为零"
+      }
+    ]
+  },
+  {
+    "category": "公基-科技自然",
+    "stem": "5G相比4G的显著特点之一：",
+    "answer_key": "A",
+    "analysis": "更高速率与更低时延。",
+    "difficulty": 1,
+    "tags": "科技",
+    "options": [
+      {
+        "key": "A",
+        "content": "更高速率更低时延"
+      },
+      {
+        "key": "B",
+        "content": "只能通话"
+      },
+      {
+        "key": "C",
+        "content": "取消无线"
+      },
+      {
+        "key": "D",
+        "content": "无需基站"
+      }
+    ]
+  },
+  {
+    "category": "时政常识",
+    "stem": "我国最高国家行政机关是：",
+    "answer_key": "A",
+    "analysis": "国务院。",
+    "difficulty": 1,
+    "tags": "机构",
+    "options": [
+      {
+        "key": "A",
+        "content": "国务院"
+      },
+      {
+        "key": "B",
+        "content": "全国人大常委会"
+      },
+      {
+        "key": "C",
+        "content": "最高人民法院"
+      },
+      {
+        "key": "D",
+        "content": "中央军委"
+      }
+    ]
+  },
+  {
+    "category": "时政常识",
+    "stem": "全国两会通常包括：",
+    "answer_key": "B",
+    "analysis": "全国人大与全国政协会议。",
+    "difficulty": 1,
+    "tags": "时政常识",
+    "options": [
+      {
+        "key": "A",
+        "content": "只有人大"
+      },
+      {
+        "key": "B",
+        "content": "人大和政协"
+      },
+      {
+        "key": "C",
+        "content": "只有政协"
+      },
+      {
+        "key": "D",
+        "content": "党代会"
+      }
+    ]
+  },
+  {
+    "category": "时政常识",
+    "stem": "公务员笔试公共科目通常包括：",
+    "answer_key": "C",
+    "analysis": "行测和申论。",
+    "difficulty": 1,
+    "tags": "公考常识",
+    "options": [
+      {
+        "key": "A",
+        "content": "只有面试"
+      },
+      {
+        "key": "B",
+        "content": "高等数学"
+      },
+      {
+        "key": "C",
+        "content": "行测和申论"
+      },
+      {
+        "key": "D",
+        "content": "英语专八"
+      }
+    ]
+  },
+  {
+    "category": "时政常识",
+    "stem": "“放管服”中的“服”主要指：",
+    "answer_key": "A",
+    "analysis": "优化服务。",
+    "difficulty": 1,
+    "tags": "改革",
+    "options": [
+      {
+        "key": "A",
+        "content": "优化服务"
+      },
+      {
+        "key": "B",
+        "content": "放松监管"
+      },
+      {
+        "key": "C",
+        "content": "服务外包"
+      },
+      {
+        "key": "D",
+        "content": "服务业优先"
+      }
+    ]
+  },
+  {
+    "category": "时政常识",
+    "stem": "乡村振兴总要求的末项是：",
+    "answer_key": "B",
+    "analysis": "产业兴旺、生态宜居、乡风文明、治理有效、生活富裕。",
+    "difficulty": 1,
+    "tags": "三农",
+    "options": [
+      {
+        "key": "A",
+        "content": "高速城镇化"
+      },
+      {
+        "key": "B",
+        "content": "生活富裕"
+      },
+      {
+        "key": "C",
+        "content": "全面消灭乡镇"
+      },
+      {
+        "key": "D",
+        "content": "取消农业"
+      }
+    ]
+  },
+  {
+    "category": "时政常识",
+    "stem": "建设更高水平平安中国，强调统筹发展和：",
+    "answer_key": "C",
+    "analysis": "安全。",
+    "difficulty": 1,
+    "tags": "治理",
+    "options": [
+      {
+        "key": "A",
+        "content": "速度"
+      },
+      {
+        "key": "B",
+        "content": "规模"
+      },
+      {
+        "key": "C",
+        "content": "安全"
+      },
+      {
+        "key": "D",
+        "content": "出口"
+      }
+    ]
+  },
+  {
+    "category": "时政常识",
+    "stem": "数字政府建设重要目标之一是：",
+    "answer_key": "A",
+    "analysis": "提升政务服务效能与便利度。",
+    "difficulty": 1,
+    "tags": "治理",
+    "options": [
+      {
+        "key": "A",
+        "content": "提升政务服务效能"
+      },
+      {
+        "key": "B",
+        "content": "取消全部线下窗口"
+      },
+      {
+        "key": "C",
+        "content": "只服务企业"
+      },
+      {
+        "key": "D",
+        "content": "只做宣传"
+      }
+    ]
+  },
+  {
+    "category": "时政常识",
+    "stem": "“碳达峰”含义是：",
+    "answer_key": "B",
+    "analysis": "碳排放量达到峰值后不再增长（再逐步下降）。",
+    "difficulty": 1,
+    "tags": "双碳",
+    "options": [
+      {
+        "key": "A",
+        "content": "碳排放立即为零"
+      },
+      {
+        "key": "B",
+        "content": "排放达峰后稳中有降"
+      },
+      {
+        "key": "C",
+        "content": "停止工业"
+      },
+      {
+        "key": "D",
+        "content": "取消煤电当日"
+      }
+    ]
+  },
+  {
+    "category": "时政常识",
+    "stem": "全过程人民民主强调：",
+    "answer_key": "C",
+    "analysis": "全链条全覆盖的民主实践。",
+    "difficulty": 1,
+    "tags": "民主",
+    "options": [
+      {
+        "key": "A",
+        "content": "只选举"
+      },
+      {
+        "key": "B",
+        "content": "只监督"
+      },
+      {
+        "key": "C",
+        "content": "民主各环节贯通"
+      },
+      {
+        "key": "D",
+        "content": "只协商"
+      }
+    ]
+  },
+  {
+    "category": "时政常识",
+    "stem": "全面建设社会主义现代化国家的首要任务是：",
+    "answer_key": "A",
+    "analysis": "高质量发展。",
+    "difficulty": 1,
+    "tags": "发展",
+    "options": [
+      {
+        "key": "A",
+        "content": "高质量发展"
+      },
+      {
+        "key": "B",
+        "content": "唯GDP增速"
+      },
+      {
+        "key": "C",
+        "content": "规模扩张优先"
+      },
+      {
+        "key": "D",
+        "content": "出口第一"
+      }
+    ]
+  }
+]

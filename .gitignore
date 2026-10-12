@@ -43,5 +43,12 @@ deploy/compose-up.log
 dump.rdb
 *.rdb
 server/tmp_*.html
-server/data/
+# Ignore crawl/runtime data under server/data, but keep question bank seeds.
+server/data/*
+!server/data/question_bank/
+server/data/question_bank/*
+!server/data/question_bank/README.md
+!server/data/question_bank/gen_*.py
+!server/data/question_bank/questions.json
+!server/data/question_bank/open_pack.json
 server/scripts/__pycache__/

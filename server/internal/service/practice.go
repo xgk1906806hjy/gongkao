@@ -313,10 +313,26 @@ type ImportQuestion struct {
 }
 
 func (s *PracticeService) ImportQuestions(items []ImportQuestion) (int, error) {
+	return s.importQuestions(items, false)
+}
+
+// ImportQuestionsSkipDup skips items whose stem already exists.
+func (s *PracticeService) ImportQuestionsSkipDup(items []ImportQuestion) (int, error) {
+	return s.importQuestions(items, true)
+}
+
+func (s *PracticeService) importQuestions(items []ImportQuestion, skipDup bool) (int, error) {
 	n := 0
 	for _, it := range items {
 		if it.Stem == "" || it.AnswerKey == "" || it.Category == "" {
 			continue
+		}
+		if skipDup {
+			var exists int64
+			s.db.Model(&model.Question{}).Where("stem = ?", it.Stem).Count(&exists)
+			if exists > 0 {
+				continue
+			}
 		}
 		cat, err := s.ensureCategory(it.Category)
 		if err != nil {
@@ -330,7 +346,7 @@ func (s *PracticeService) ImportQuestions(items []ImportQuestion) (int, error) {
 			CategoryID: cat.ID,
 			Stem:       it.Stem,
 			Type:       "single",
-			AnswerKey:  it.AnswerKey,
+			AnswerKey:  strings.ToUpper(strings.TrimSpace(it.AnswerKey)),
 			Analysis:   it.Analysis,
 			Difficulty: diff,
 			Tags:       it.Tags,
@@ -342,7 +358,7 @@ func (s *PracticeService) ImportQuestions(items []ImportQuestion) (int, error) {
 		for i, opt := range it.Options {
 			_ = s.db.Create(&model.QuestionOption{
 				QuestionID: q.ID,
-				Key:        opt["key"],
+				Key:        strings.ToUpper(strings.TrimSpace(opt["key"])),
 				Content:    opt["content"],
 				Sort:       i,
 			}).Error
@@ -353,10 +369,15 @@ func (s *PracticeService) ImportQuestions(items []ImportQuestion) (int, error) {
 }
 
 func (s *PracticeService) ensureCategory(name string) (*model.QuestionCategory, error) {
+	return s.EnsureCategory(name, 0)
+}
+
+// EnsureCategory creates category if missing; updates sort when sort>0.
+func (s *PracticeService) EnsureCategory(name string, sort int) (*model.QuestionCategory, error) {
 	var cat model.QuestionCategory
 	err := s.db.Where("name = ?", name).First(&cat).Error
 	if errors.Is(err, gorm.ErrRecordNotFound) {
-		cat = model.QuestionCategory{Name: name, Status: model.StatusPublished}
+		cat = model.QuestionCategory{Name: name, Sort: sort, Status: model.StatusPublished}
 		if err := s.db.Create(&cat).Error; err != nil {
 			return nil, err
 		}
@@ -365,7 +386,17 @@ func (s *PracticeService) ensureCategory(name string) (*model.QuestionCategory, 
 	if err != nil {
 		return nil, err
 	}
+	if sort > 0 && cat.Sort != sort {
+		_ = s.db.Model(&cat).Update("sort", sort).Error
+		cat.Sort = sort
+	}
 	return &cat, nil
+}
+
+func (s *PracticeService) CountQuestions() (int64, error) {
+	var n int64
+	err := s.db.Model(&model.Question{}).Count(&n).Error
+	return n, err
 }
 
 // ImportCSV expects header: category,stem,answer_key,analysis,difficulty,tags,A,B,C,D

@@ -53,6 +53,7 @@ func main() {
 	_, _ = c.AddFunc("@every 1m", func() {
 		remindSvc.ProcessDue(context.Background())
 	})
+	pracSvc := service.NewPracticeService(db)
 	refreshAnnouncements := func(ctx context.Context) {
 		if _, err := crawler.WriteAnnouncementWorkbook(ctx, cfg); err != nil {
 			slog.Error("announcement workbook", "err", err)
@@ -64,14 +65,36 @@ func main() {
 		}
 		slog.Info("announcements imported from xlsx", "count", n, "path", cfg.AnnouncementXLSX)
 	}
+	refreshQuestionBank := func(ctx context.Context) {
+		items, err := crawler.CollectQuestions(ctx, db, cfg)
+		if err != nil {
+			slog.Error("question bank collect", "err", err)
+			return
+		}
+		if _, err := crawler.SaveQuestionBankJSON(cfg, items); err != nil {
+			slog.Error("question bank write", "err", err)
+		}
+		n, err := pracSvc.ImportQuestionsSkipDup(items)
+		if err != nil {
+			slog.Error("question bank import", "err", err)
+			return
+		}
+		slog.Info("question bank imported", "collected", len(items), "imported_new", n)
+	}
 	if cfg.CrawlerEnabled {
 		_, _ = c.AddFunc("@every 30m", func() {
 			bg := context.Background()
 			refreshAnnouncements(bg)
 			runner.RunOnce(bg)
+			if cfg.CrawlerQuestionBankEnabled {
+				refreshQuestionBank(bg)
+			}
 		})
 		refreshAnnouncements(ctx)
 		runner.RunOnce(ctx)
+		if cfg.CrawlerQuestionBankEnabled {
+			refreshQuestionBank(ctx)
+		}
 	}
 	if cfg.AffairsDailyPushEnabled {
 		_, _ = c.AddFunc("0 8 * * *", func() {

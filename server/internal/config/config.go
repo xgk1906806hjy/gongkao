@@ -54,6 +54,10 @@ type Config struct {
 	CrawlerAffairsRSSURLs       string // comma-separated extra RSS URLs
 	CrawlerAnnouncementListURLs string // optional name|url pairs, comma-separated
 	AnnouncementXLSX            string
+	QuestionBankJSON            string // staging file for crawled/merged questions
+	QuestionBankFeedURLs        string // comma-separated authorized JSON feeds
+	QuestionBankExtraPacks      string // comma-separated local JSON packs
+	CrawlerQuestionBankEnabled  bool
 	AffairsDailyPushEnabled     bool
 	SessionKeyAESKey            string
 	AdminBootstrapUser          string
@@ -80,6 +84,10 @@ func Load() *Config {
 		CrawlerAffairsRSSURLs:       os.Getenv("CRAWLER_AFFAIRS_RSS_URLS"),
 		CrawlerAnnouncementListURLs: os.Getenv("CRAWLER_ANNOUNCEMENT_LIST_URLS"),
 		AnnouncementXLSX:            getenv("ANNOUNCEMENT_XLSX", "data/announcements.xlsx"),
+		QuestionBankJSON:            getenv("QUESTION_BANK_JSON", "data/question_bank/crawled.json"),
+		QuestionBankFeedURLs:        os.Getenv("QUESTION_BANK_FEED_URLS"),
+		QuestionBankExtraPacks:      os.Getenv("QUESTION_BANK_EXTRA_PACKS"),
+		CrawlerQuestionBankEnabled:  boolEnv("CRAWLER_QUESTION_BANK_ENABLED", true),
 		AffairsDailyPushEnabled:     boolEnv("AFFAIRS_DAILY_PUSH_ENABLED", false),
 		SessionKeyAESKey:            getenv("SESSION_KEY_AES_KEY", "0123456789abcdef0123456789abcdef"),
 		AdminBootstrapUser:          getenv("ADMIN_BOOTSTRAP_USER", "admin"),
