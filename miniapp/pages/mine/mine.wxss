@@ -23,3 +23,5 @@
   margin-bottom: 6rpx;
 }
 .menu { font-size: 30rpx; }
+.ai-entry { background: linear-gradient(135deg, #1a4f7a, #2f78b0); color: #fff; }
+.ai-entry .muted { color: rgba(255, 255, 255, 0.8); }

@@ -11,6 +11,10 @@
     </view>
     <button size="mini" class="btn-primary" bindtap="login">微信登录</button>
   </view>
+  <view class="card menu ai-entry" bindtap="go" data-url="/pages/ai/ai">
+    <view>AI 备考助手</view>
+    <view class="muted">简历选岗 · 复习计划 · 备考问答</view>
+  </view>
   <view class="card menu" bindtap="go" data-url="/pages/mine/exams/exams">我的考试</view>
   <view class="card menu" bindtap="go" data-url="/pages/mine/todos/todos">我的代办</view>
   <view class="card menu" bindtap="go" data-url="/pages/mine/wrong/wrong">错题本</view>

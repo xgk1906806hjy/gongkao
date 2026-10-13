@@ -44,6 +44,18 @@ Base: `/api/v1`
 - `POST /me/affairs/favorites` `{ "article_id" }`
 - `DELETE /me/affairs/favorites/:id`
 
+## AI 分析（需登录）
+
+未配置 `AI_API_KEY` 时全部走规则引擎（`provider="rule"`）；大模型调用失败或超出 `AI_DAILY_LIMIT` 时自动回退规则引擎，并在 `notice` 中说明。
+
+- `GET /ai/status` → `{ "llm_enabled", "model", "daily_limit", "used_today" }`
+- `GET /me/ai/profile` / `POST /me/ai/profile` `{ "education?", "major?", "graduation_year?", "fresh_graduate?", "political_status?", "work_years?", "grassroots_years?", "certificates?", "target_regions?", "target_types?": "civil|institution", "exam_date?": "YYYY-MM-DD", "daily_hours?", "resume_text?" }`
+- `DELETE /me/ai/profile`：删除简历、资料与全部 AI 记录
+- `POST /ai/resume/analyze` `{ "resume_text?", "profile?": {同上} }` → `{ report_id, provider, notice?, profile, summary, strengths[], weaknesses[], directions[{name,reason}], recommendations[{announcement_id,title,type,region,register_end,exam_at,score,reasons[],cautions[]}], next_steps[] }`
+- `POST /ai/study-plan` `{ "exam_date?", "daily_hours?", "focus?" }` → `{ report_id, provider, exam_date, exam_date_note?, days_left, daily_hours, summary, diagnosis[], phases[], daily_template[{module,minutes,task}], weekly[], tips[] }`
+- `POST /ai/ask` `{ "question" }` → `{ report_id, provider, notice?, answer }`
+- `GET /me/ai/reports?kind=resume|plan|ask&page=` / `GET /me/ai/reports/:id`（含 `result`）
+
 ## Admin
 
 - `POST /admin/login` `{ "username", "password" }` → admin JWT

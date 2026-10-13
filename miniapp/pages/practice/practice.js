@@ -25,5 +25,10 @@ Page({
     }).catch((err) => {
       wx.showToast({ title: err.message || '开始失败', icon: 'none' })
     })
+  },
+  openPlan() {
+    auth.ensureLogin().then(() => {
+      wx.navigateTo({ url: '/pages/ai/ai?tab=plan' })
+    }).catch(() => wx.showToast({ title: '请先登录', icon: 'none' }))
   }
 })

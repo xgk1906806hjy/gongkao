@@ -41,6 +41,19 @@ func Register(r *gin.Engine, h *Handlers) {
 			me.GET("/affairs/favorites", h.ListFavorites)
 			me.POST("/affairs/favorites", h.FavoriteAffair)
 			me.DELETE("/affairs/favorites/:id", h.UnfavoriteAffair)
+			me.GET("/ai/profile", h.GetAIProfile)
+			me.POST("/ai/profile", h.SaveAIProfile)
+			me.DELETE("/ai/profile", h.DeleteAIProfile)
+			me.GET("/ai/reports", h.ListAIReports)
+			me.GET("/ai/reports/:id", h.GetAIReport)
+		}
+
+		aiGroup := v1.Group("/ai", middleware.Auth(h.JWT, pkg.TokenAccess))
+		{
+			aiGroup.GET("/status", h.AIStatus)
+			aiGroup.POST("/resume/analyze", h.AnalyzeResume)
+			aiGroup.POST("/study-plan", h.GenerateStudyPlan)
+			aiGroup.POST("/ask", h.AIAsk)
 		}
 
 		prac := v1.Group("/practice", middleware.Auth(h.JWT, pkg.TokenAccess))

@@ -5,6 +5,7 @@ import (
 	"log/slog"
 	"os"
 
+	"gongkao/internal/ai"
 	"gongkao/internal/config"
 	"gongkao/internal/crawler"
 	"gongkao/internal/handler"
@@ -43,6 +44,8 @@ func main() {
 	pracSvc := service.NewPracticeService(db)
 	affSvc := service.NewAffairsService(db)
 	subSvc := service.NewSubscribeService(db)
+	llm := ai.NewClient(cfg.AIBaseURL, cfg.AIAPIKey, cfg.AIModel, cfg.AITimeout)
+	aiSvc := service.NewAIService(db, llm, cfg.AIDailyLimit)
 
 	if err := authSvc.EnsureAdmin(); err != nil {
 		log.Fatalf("admin bootstrap: %v", err)
@@ -60,7 +63,7 @@ func main() {
 	crawler.NewRunner(db, annSvc, affSvc, cfg).RunOnce(nil)
 
 	h := &handler.Handlers{
-		Auth: authSvc, Ann: annSvc, Exam: examSvc, Prac: pracSvc, Aff: affSvc, Sub: subSvc,
+		Auth: authSvc, Ann: annSvc, Exam: examSvc, Prac: pracSvc, Aff: affSvc, Sub: subSvc, AI: aiSvc,
 		JWT: jwtm, DB: db,
 		ClientCfg: func() gin.H {
 			todoTpl := cfg.WXSubscribeTemplateTodo
@@ -95,7 +98,7 @@ func main() {
 	})
 	handler.Register(r, h)
 
-	slog.Info("api listening", "addr", cfg.HTTPAddr, "wx_mock", cfg.WXMock)
+	slog.Info("api listening", "addr", cfg.HTTPAddr, "wx_mock", cfg.WXMock, "ai_llm", llm.Enabled(), "ai_model", cfg.AIModel)
 	if err := r.Run(cfg.HTTPAddr); err != nil {
 		log.Fatal(err)
 	}

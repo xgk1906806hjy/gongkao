@@ -2,6 +2,10 @@
   <view class="card stats" wx:if="{{stats}}">
     <view>已练 {{stats.total_answered}} 题 · 正确率 {{accuracy}}</view>
   </view>
+  <view class="card plan-entry" bindtap="openPlan">
+    <view>AI 复习计划</view>
+    <view class="muted">根据你的正确率和考试日期生成每日学习安排 ›</view>
+  </view>
   <view class="card" wx:for="{{categories}}" wx:key="id">
     <view class="name">{{item.name}}</view>
     <view class="actions">

@@ -59,6 +59,11 @@ type Config struct {
 	QuestionBankExtraPacks      string // comma-separated local JSON packs
 	CrawlerQuestionBankEnabled  bool
 	AffairsDailyPushEnabled     bool
+	AIBaseURL                   string // OpenAI-compatible endpoint, e.g. https://api.deepseek.com/v1
+	AIAPIKey                    string // empty = rule engine only
+	AIModel                     string
+	AITimeout                   time.Duration
+	AIDailyLimit                int // LLM calls per user per day
 	SessionKeyAESKey            string
 	AdminBootstrapUser          string
 	AdminBootstrapPass          string
@@ -89,6 +94,11 @@ func Load() *Config {
 		QuestionBankExtraPacks:      os.Getenv("QUESTION_BANK_EXTRA_PACKS"),
 		CrawlerQuestionBankEnabled:  boolEnv("CRAWLER_QUESTION_BANK_ENABLED", true),
 		AffairsDailyPushEnabled:     boolEnv("AFFAIRS_DAILY_PUSH_ENABLED", false),
+		AIBaseURL:                   getenv("AI_BASE_URL", "https://api.openai.com/v1"),
+		AIAPIKey:                    os.Getenv("AI_API_KEY"),
+		AIModel:                     getenv("AI_MODEL", "gpt-4o-mini"),
+		AITimeout:                   durationEnv("AI_TIMEOUT", 60*time.Second),
+		AIDailyLimit:                intEnv("AI_DAILY_LIMIT", 30),
 		SessionKeyAESKey:            getenv("SESSION_KEY_AES_KEY", "0123456789abcdef0123456789abcdef"),
 		AdminBootstrapUser:          getenv("ADMIN_BOOTSTRAP_USER", "admin"),
 		AdminBootstrapPass:          getenv("ADMIN_BOOTSTRAP_PASS", "admin123"),
@@ -112,6 +122,14 @@ func boolEnv(k string, def bool) bool {
 		return def
 	}
 	return b
+}
+
+func intEnv(k string, def int) int {
+	v, err := strconv.Atoi(os.Getenv(k))
+	if err != nil {
+		return def
+	}
+	return v
 }
 
 func durationEnv(k string, def time.Duration) time.Duration {

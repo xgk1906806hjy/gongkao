@@ -7,18 +7,11 @@ import (
 
 	"gongkao/internal/annxlsx"
 	"gongkao/internal/model"
-	"gongkao/internal/pkg"
 )
 
 func TestImportFromXLSXOfflinesSeed(t *testing.T) {
 	dir := t.TempDir()
-	db, err := pkg.OpenDB("sqlite:" + filepath.Join(dir, "t.db"))
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := pkg.AutoMigrate(db); err != nil {
-		t.Fatal(err)
-	}
+	db := newTestDB(t)
 	svc := NewAnnouncementService(db)
 	if err := svc.UpsertFromCrawl(&model.Announcement{
 		Type:        model.AnnouncementCivil,
@@ -72,13 +65,7 @@ func TestImportFromXLSXOfflinesSeed(t *testing.T) {
 
 func TestImportFromXLSXMissing(t *testing.T) {
 	dir := t.TempDir()
-	db, err := pkg.OpenDB("sqlite:" + filepath.Join(dir, "t.db"))
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := pkg.AutoMigrate(db); err != nil {
-		t.Fatal(err)
-	}
+	db := newTestDB(t)
 	n, err := NewAnnouncementService(db).ImportFromXLSX(filepath.Join(dir, "nope.xlsx"))
 	if err != nil || n != 0 {
 		t.Fatalf("n=%d err=%v", n, err)

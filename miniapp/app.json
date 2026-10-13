@@ -12,8 +12,12 @@
     "pages/mine/todos/todos",
     "pages/mine/wrong/wrong",
     "pages/mine/favorites/favorites",
-    "pages/mine/subscribe/subscribe"
+    "pages/mine/subscribe/subscribe",
+    "pages/ai/ai"
   ],
+  "networkTimeout": {
+    "request": 90000
+  },
   "window": {
     "navigationBarTitleText": "公考助手",
     "navigationBarBackgroundColor": "#1a4f7a",

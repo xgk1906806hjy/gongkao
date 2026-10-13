@@ -1,3 +1,5 @@
 .stats { color: #1a4f7a; font-weight: 600; }
+.plan-entry { border-left: 8rpx solid #1a4f7a; font-weight: 600; }
+.plan-entry .muted { font-weight: 400; margin-top: 6rpx; }
 .name { font-size: 32rpx; font-weight: 600; margin-bottom: 16rpx; }
 .actions { display: flex; gap: 16rpx; }

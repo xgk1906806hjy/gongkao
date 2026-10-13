@@ -1,0 +1,174 @@
+<view class="container">
+  <view class="tabs">
+    <view class="tab {{tab==='resume'?'on':''}}" data-tab="resume" bindtap="switchTab">简历选岗</view>
+    <view class="tab {{tab==='plan'?'on':''}}" data-tab="plan" bindtap="switchTab">复习计划</view>
+    <view class="tab {{tab==='ask'?'on':''}}" data-tab="ask" bindtap="switchTab">备考问答</view>
+    <view class="tab {{tab==='history'?'on':''}}" data-tab="history" bindtap="switchTab">历史</view>
+  </view>
+  <view class="muted status" wx:if="{{status}}">
+    {{status.llm_enabled ? ('AI 模型：' + status.model + ' · 今日 ' + status.used_today + '/' + status.daily_limit) : '当前为规则引擎模式（未配置大模型）'}}
+  </view>
+
+  <!-- 简历选岗 -->
+  <view wx:if="{{tab==='resume'}}">
+    <view class="card">
+      <view class="label">粘贴简历内容</view>
+      <textarea class="textarea" maxlength="8000" placeholder="粘贴简历文字：学历、专业、毕业时间、政治面貌、证书、工作/基层经历、意向地区等" value="{{resumeText}}" bindinput="onResumeInput" />
+      <view class="link" bindtap="toggleForm">{{showForm ? '收起基本信息' : '补充 / 修改基本信息 ▾'}}</view>
+      <view wx:if="{{showForm}}" class="form">
+        <picker range="{{educations}}" value="{{eduIndex}}" bindchange="onEdu">
+          <view class="row"><text>学历</text><text class="val">{{educations[eduIndex]}}</text></view>
+        </picker>
+        <view class="row"><text>专业</text><input class="val-input" placeholder="如：会计学" value="{{profile.major}}" data-key="major" bindinput="onField" /></view>
+        <picker range="{{politicals}}" value="{{polIndex}}" bindchange="onPol">
+          <view class="row"><text>政治面貌</text><text class="val">{{politicals[polIndex]}}</text></view>
+        </picker>
+        <view class="row"><text>应届生</text><switch checked="{{profile.fresh_graduate}}" bindchange="onFresh" /></view>
+        <view class="row"><text>工作年限</text><input class="val-input" type="number" placeholder="0" value="{{profile.work_years || ''}}" data-key="work_years" bindinput="onField" /></view>
+        <view class="row"><text>意向地区</text><input class="val-input" placeholder="如：湖南,广东" value="{{profile.target_regions}}" data-key="target_regions" bindinput="onField" /></view>
+        <picker range="{{types}}" range-key="label" value="{{typeIndex}}" bindchange="onType">
+          <view class="row"><text>考试类型</text><text class="val">{{types[typeIndex].label}}</text></view>
+        </picker>
+        <view class="row"><text>证书</text><input class="val-input" placeholder="如：英语六级,法律职业资格" value="{{profile.certificates}}" data-key="certificates" bindinput="onField" /></view>
+      </view>
+      <button class="btn-primary submit" loading="{{loading}}" bindtap="analyze">分析简历 · 推荐岗位</button>
+      <view class="muted tip">简历仅用于生成分析，可随时在「历史」中清除。</view>
+    </view>
+
+    <view wx:if="{{resume}}">
+      <view class="notice" wx:if="{{resume.notice}}">{{resume.notice}}</view>
+      <view class="card">
+        <view class="h">综合评估</view>
+        <view class="p">{{resume.summary}}</view>
+        <view class="tags">
+          <text class="tag" wx:if="{{resume.profile.education}}">{{resume.profile.education}}</text>
+          <text class="tag" wx:if="{{resume.profile.major}}">{{resume.profile.major}}</text>
+          <text class="tag" wx:if="{{resume.profile.fresh_graduate}}">应届</text>
+          <text class="tag" wx:if="{{resume.profile.political_status}}">{{resume.profile.political_status}}</text>
+        </view>
+      </view>
+      <view class="card" wx:if="{{resume.strengths.length}}">
+        <view class="h">报考优势</view>
+        <view class="li good" wx:for="{{resume.strengths}}" wx:key="*this">{{item}}</view>
+      </view>
+      <view class="card" wx:if="{{resume.weaknesses.length}}">
+        <view class="h">注意事项</view>
+        <view class="li warn" wx:for="{{resume.weaknesses}}" wx:key="*this">{{item}}</view>
+      </view>
+      <view class="card" wx:if="{{resume.directions.length}}">
+        <view class="h">适合的岗位方向</view>
+        <view class="dir" wx:for="{{resume.directions}}" wx:key="name">
+          <view class="dir-name">{{item.name}}</view>
+          <view class="muted">{{item.reason}}</view>
+        </view>
+      </view>
+      <view class="card">
+        <view class="h">推荐考试（{{resume.recommendations.length}}）</view>
+        <view wx:if="{{!resume.recommendations.length}}" class="muted">暂无匹配的在招公告，可稍后再试或放宽意向地区。</view>
+        <view class="rec" wx:for="{{resume.recommendations}}" wx:key="announcement_id" data-id="{{item.announcement_id}}" bindtap="openAnnouncement">
+          <view class="rec-head">
+            <view class="rec-title">{{item.title}}</view>
+            <view class="score">{{item.score}}</view>
+          </view>
+          <view class="muted">
+            <text class="tag {{item.type==='institution'?'inst':''}}">{{item.type_label}}</text>
+            <text wx:if="{{item.region}}">{{item.region}} · </text>
+            <text wx:if="{{item.register_end_text}}">报名截止 {{item.register_end_text}}</text>
+          </view>
+          <view class="li good small" wx:for="{{item.reasons}}" wx:for-item="r" wx:key="*this">{{r}}</view>
+          <view class="li warn small" wx:for="{{item.cautions}}" wx:for-item="c" wx:key="*this">{{c}}</view>
+        </view>
+      </view>
+      <view class="card" wx:if="{{resume.next_steps.length}}">
+        <view class="h">下一步建议</view>
+        <view class="li" wx:for="{{resume.next_steps}}" wx:key="*this">{{index + 1}}. {{item}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 复习计划 -->
+  <view wx:if="{{tab==='plan'}}">
+    <view class="card">
+      <picker mode="date" start="{{today}}" value="{{examDate}}" bindchange="onExamDate">
+        <view class="row"><text>考试日期</text><text class="val">{{examDate || '自动（取我的考试 / 默认 90 天）'}}</text></view>
+      </picker>
+      <picker range="{{hours}}" value="{{hourIndex}}" bindchange="onHours">
+        <view class="row"><text>每天可学习</text><text class="val">{{hours[hourIndex]}} 小时</text></view>
+      </picker>
+      <textarea class="textarea short" maxlength="300" placeholder="补充诉求（可选）：如“在职备考，只有晚上有时间”“数量关系很差”" value="{{focus}}" bindinput="onFocus" />
+      <button class="btn-primary submit" loading="{{loading}}" bindtap="makePlan">生成复习计划</button>
+      <view class="muted tip">计划会结合你的刷题正确率与错题本，练得越多越精准。</view>
+    </view>
+
+    <view wx:if="{{plan}}">
+      <view class="notice" wx:if="{{plan.notice}}">{{plan.notice}}</view>
+      <view class="card">
+        <view class="countdown">距考试 <text class="big">{{plan.days_left}}</text> 天</view>
+        <view class="muted">{{plan.exam_date}} · 每天 {{plan.daily_hours}} 小时</view>
+        <view class="muted" wx:if="{{plan.exam_date_note}}">{{plan.exam_date_note}}</view>
+        <view class="p">{{plan.summary}}</view>
+      </view>
+      <view class="card">
+        <view class="h">能力诊断</view>
+        <view class="diag" wx:for="{{plan.diagnosis}}" wx:key="category">
+          <text class="diag-name">{{item.category}}</text>
+          <text class="muted">{{item.answered}} 题 · {{item.accuracy_text}}</text>
+          <text class="level lv-{{item.level}}">{{item.level}}</text>
+        </view>
+        <view class="link" bindtap="goPractice">去刷题提升数据准确度 ›</view>
+      </view>
+      <view class="card">
+        <view class="h">每日学习模板</view>
+        <view class="block" wx:for="{{plan.daily_template}}" wx:key="module">
+          <view class="block-head"><text class="dir-name">{{item.module}}</text><text class="muted">{{item.minutes}} 分钟</text></view>
+          <view class="muted">{{item.task}}</view>
+        </view>
+      </view>
+      <view class="card">
+        <view class="h">阶段安排</view>
+        <view class="phase" wx:for="{{plan.phases}}" wx:key="name">
+          <view class="dir-name">{{item.name}} <text class="muted">{{item.start}} ~ {{item.end}}</text></view>
+          <view class="muted">{{item.goal}}</view>
+          <view class="tags"><text class="tag" wx:for="{{item.focus}}" wx:for-item="f" wx:key="*this">{{f}}</text></view>
+        </view>
+      </view>
+      <view class="card">
+        <view class="h">周计划</view>
+        <view class="phase" wx:for="{{plan.weekly}}" wx:key="week">
+          <view class="dir-name">第 {{item.week}} 周 <text class="muted">{{item.start}} ~ {{item.end}}</text></view>
+          <view class="muted">{{item.focus}}</view>
+          <view class="li small" wx:for="{{item.tasks}}" wx:for-item="t" wx:key="*this">· {{t}}</view>
+        </view>
+      </view>
+      <view class="card" wx:if="{{plan.tips.length}}">
+        <view class="h">备考建议</view>
+        <view class="li" wx:for="{{plan.tips}}" wx:key="*this">· {{item}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 备考问答 -->
+  <view wx:if="{{tab==='ask'}}">
+    <view class="chat">
+      <view wx:if="{{!chats.length}}" class="empty">问问报考条件、时间分配、申论/面试怎么准备…</view>
+      <view class="msg {{item.role}}" wx:for="{{chats}}" wx:key="index">
+        <view class="bubble">{{item.text}}</view>
+        <view class="muted small" wx:if="{{item.notice}}">{{item.notice}}</view>
+      </view>
+    </view>
+    <view class="ask-bar">
+      <input class="ask-input" maxlength="500" placeholder="输入你的问题" value="{{question}}" bindinput="onQuestion" confirm-type="send" bindconfirm="ask" />
+      <button size="mini" class="btn-primary" loading="{{loading}}" bindtap="ask">发送</button>
+    </view>
+  </view>
+
+  <!-- 历史 -->
+  <view wx:if="{{tab==='history'}}">
+    <view wx:if="{{!reports.length}}" class="empty">暂无记录</view>
+    <view class="card rec" wx:for="{{reports}}" wx:key="id" data-id="{{item.id}}" bindtap="openReport">
+      <view class="rec-title">{{item.title}}</view>
+      <view class="muted"><text class="tag">{{item.kind_label}}</text>{{item.created_text}} · {{item.provider === 'rule' ? '规则引擎' : item.provider}}</view>
+    </view>
+    <button class="btn-ghost submit" bindtap="clearData">清除我的简历与 AI 记录</button>
+  </view>
+</view>

@@ -223,6 +223,49 @@ type UserSubscribePref struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
+// AIProfile is the candidate profile used by AI job matching and study planning.
+type AIProfile struct {
+	ID              uint64     `gorm:"primaryKey" json:"id"`
+	UserID          uint64     `gorm:"uniqueIndex;not null" json:"user_id"`
+	Education       string     `gorm:"size:32" json:"education"` // 大专 | 本科 | 硕士 | 博士
+	Major           string     `gorm:"size:128" json:"major"`
+	GraduationYear  int        `json:"graduation_year"`
+	FreshGraduate   bool       `json:"fresh_graduate"`
+	PoliticalStatus string     `gorm:"size:32" json:"political_status"` // 中共党员 | 共青团员 | 群众
+	WorkYears       int        `json:"work_years"`
+	GrassrootsYears int        `json:"grassroots_years"`
+	Certificates    string     `gorm:"size:512" json:"certificates"`   // comma-separated
+	TargetRegions   string     `gorm:"size:256" json:"target_regions"` // comma-separated
+	TargetTypes     string     `gorm:"size:64" json:"target_types"`    // civil,institution
+	ExamDate        *time.Time `json:"exam_date"`
+	DailyHours      float64    `json:"daily_hours"`
+	ResumeText      string     `gorm:"type:text" json:"resume_text"`
+	CreatedAt       time.Time  `json:"created_at"`
+	UpdatedAt       time.Time  `json:"updated_at"`
+}
+
+func (AIProfile) TableName() string { return "ai_profiles" }
+
+const (
+	AIReportResume = "resume"
+	AIReportPlan   = "plan"
+	AIReportAsk    = "ask"
+)
+
+// AIReport stores each AI analysis result so users can revisit it.
+type AIReport struct {
+	ID        uint64    `gorm:"primaryKey" json:"id"`
+	UserID    uint64    `gorm:"index;not null" json:"user_id"`
+	Kind      string    `gorm:"size:16;index;not null" json:"kind"`
+	Title     string    `gorm:"size:256" json:"title"`
+	Input     string    `gorm:"type:text" json:"-"`
+	Output    string    `gorm:"type:text" json:"-"`
+	Provider  string    `gorm:"size:64" json:"provider"` // llm model name, or "rule"
+	CreatedAt time.Time `gorm:"index" json:"created_at"`
+}
+
+func (AIReport) TableName() string { return "ai_reports" }
+
 func AllModels() []interface{} {
 	return []interface{}{
 		&User{}, &AdminUser{}, &Announcement{}, &UserExam{}, &Todo{},
@@ -230,5 +273,6 @@ func AllModels() []interface{} {
 		&PracticeSession{}, &UserAnswer{}, &WrongQuestion{},
 		&AffairsArticle{}, &AffairsFavorite{}, &AffairsRead{},
 		&CrawlFailure{}, &UserSubscribePref{},
+		&AIProfile{}, &AIReport{},
 	}
 }

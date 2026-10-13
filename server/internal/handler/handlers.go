@@ -22,6 +22,7 @@ type Handlers struct {
 	Prac      *service.PracticeService
 	Aff       *service.AffairsService
 	Sub       *service.SubscribeService
+	AI        *service.AIService
 	ClientCfg func() gin.H
 	JWT       *pkg.JWTManager
 	DB        *gorm.DB
